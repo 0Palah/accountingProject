@@ -8,7 +8,7 @@ const sendSgEmail = require("../../helpers/sendSgEmail");
 const { BASE_URL } = process.env;
 
 async function registerUser(req, res) {
-  const { password, email, subscription } = req.body;
+  const { password, email, role } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -25,7 +25,7 @@ async function registerUser(req, res) {
   const result = await User.create({
     password: hashPassword,
     email,
-    subscription,
+    role,
     avatarURL,
     verificationToken,
   });
@@ -41,10 +41,8 @@ async function registerUser(req, res) {
   res.status(201).json({
     email: result.email,
     password: result.password,
-    subscription: result.subscription,
+    role: result.role,
   });
 }
 
 module.exports = registerUser;
-
-

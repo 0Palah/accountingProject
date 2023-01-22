@@ -17,7 +17,7 @@ async function resendVerificationEmail(req, res) {
     throw createError({ status: 404, message: "User not found" });
   }
 
-  if (user.verify) {
+  if (user.status) {
     throw createError({
       status: 400,
       message: "Verification has already been passed",

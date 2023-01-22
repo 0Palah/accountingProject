@@ -2,9 +2,9 @@ const Joi = require("Joi");
 const emailRegexp = require("../helpers/validateEmail");
 
 const registerUserSchema = Joi.object({
-  password: Joi.string().min(8).required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  subscription: Joi.string().valid("starter", "pro", "business"),
+  password: Joi.string().min(8).required(),
+  role: Joi.string().valid("user", "moderator", "admin"),
 });
 
 const loginUserSchema = Joi.object({

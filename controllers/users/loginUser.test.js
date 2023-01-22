@@ -20,8 +20,6 @@ describe("test users routes", () => {
     mongoose.disconnect();
   });
 
-  //1.Ендпоінт відповідає зі статус кодом 200 та токеном в боді
-  //2. В БД успішно записався токен користувача
   test("user login successfully", async () => {
     const newUser = {
       email: "Ford@get.net",

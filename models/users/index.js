@@ -3,21 +3,21 @@ const emailRegexp = require("../../helpers/validateEmail");
 
 const userSchema = new Schema(
   {
-    password: {
-      type: String,
-      minlength: 8,
-      required: [true, "Set password for user"],
-    },
     email: {
       type: String,
       match: emailRegexp,
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
+    password: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      minlength: 8,
+      required: [true, "Set password for user"],
+    },
+    role: {
+      type: String,
+      enum: ["user", "moderator", "admin"],
+      default: "user",
     },
     token: {
       type: String,
@@ -27,11 +27,11 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    avatarURL: {
-      type: String,
-      required: [true, "Avatar is required"],
-    },
-    verify: {
+    // avatarURL: {
+    //   type: String,
+    //   required: [true, "Avatar is required"],
+    // },
+    status: {
       type: Boolean,
       default: false,
     },
