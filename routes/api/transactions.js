@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const controllers = require("../../controllers/contacts");
+const controllers = require("../../controllers/transactions");
 const middlewares = require("../../middlewares");
 const schemas = require("../../schemas");
 const controllerWrapper = require("../../helpers/controllerWrapper");
@@ -22,7 +22,7 @@ router.get(
 router.post(
   "/",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.contact.addContactsSchema),
+  middlewares.validateBody(schemas.transactions.addTransactionsSchema),
   controllerWrapper(controllers.addContact)
 );
 
@@ -35,14 +35,14 @@ router.delete(
 router.put(
   "/:contactId",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.contact.addContactsSchema),
+  middlewares.validateBody(schemas.transactions.addTransactionsSchema),
   controllerWrapper(controllers.updateContact)
 );
 
 router.patch(
   "/:contactId/favorite",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.contact.updateFavoriteByIdSchema),
+  middlewares.validateBody(schemas.transactions.updateFavoriteByIdSchema),
   controllerWrapper(controllers.updateFavoriteById)
 );
 

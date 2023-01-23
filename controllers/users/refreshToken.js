@@ -20,15 +20,19 @@ async function refreshToken(req, res) {
     id: user.id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "5m" });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "10d" });
   const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
-    expiresIn: "10d",
+    expiresIn: "30d",
   });
 
-  await User.findByIdAndUpdate(user.id, { token, refreshToken });
+  const userData = await User.findByIdAndUpdate(
+    user.id,
+    { token, refreshToken },
+    { new: true }
+  );
 
   res.cookie("refreshToken", refreshToken, {
-    maxAge: 10 * 24 * 60 * 60 * 1000,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
     // httpOnly: true,
   });
   res.json({ token, refreshToken });

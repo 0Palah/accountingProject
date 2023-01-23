@@ -39,7 +39,11 @@ async function loginUser(req, res) {
     expiresIn: "30d",
   });
 
-  await User.findByIdAndUpdate(user.id, { token, refreshToken }, { new: true });
+  const userData = await User.findByIdAndUpdate(
+    user.id,
+    { token, refreshToken },
+    { new: true }
+  );
 
   res.cookie("refreshToken", refreshToken, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
