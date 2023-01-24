@@ -1,19 +1,19 @@
-const TransactionService = require("../transactionServices");
+const TransactionService = require("../transactions.service");
 const TransactionMessages = require("../transactions.messages");
 
 async function addTransaction(req, res) {
-  console.log(req.body);
+  const { _id = "0000000" } = req.user;
 
-  const { _id } = req.user;
-
-  console.log(_id);
-
-  const newData = {
+  const newTransactionData = {
     author: _id,
     ...req.body,
   };
 
-  const newTransaction = await TransactionService.addTransaction(newData);
+  console.log("newTransaction", newTransactionData);
+
+  const newTransaction = await TransactionService.addTransaction(
+    newTransactionData
+  );
 
   if (!newTransaction) {
     throw new Error();

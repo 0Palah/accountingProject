@@ -1,4 +1,4 @@
-const TransactionModel = require("../transaction.model");
+const TransactionModel = require("./transaction.model");
 
 const getAllTransactions = async () => {
   return TransactionModel.find().exec();
@@ -6,6 +6,12 @@ const getAllTransactions = async () => {
 
 const addTransaction = async (dto) => {
   return TransactionModel.create(dto);
+};
+
+const updateTransactionById = async (id, updateData) => {
+  return TransactionModel.findByIdAndUpdate(id, updateData, {
+    new: true,
+  });
 };
 
 const findTransactionById = async (id) => {
@@ -18,8 +24,14 @@ const findTransactionById = async (id) => {
   return result;
 };
 
+const deleteTransactionById = async (id) => {
+  return TransactionModel.findByIdAndRemove(id);
+};
+
 module.exports = {
   getAllTransactions,
   addTransaction,
   findTransactionById,
+  updateTransactionById,
+  deleteTransactionById,
 };

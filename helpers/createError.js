@@ -6,7 +6,7 @@ const messages = {
   409: "Conflict",
 };
 
-function createError({ status, message = messages[status] }) {
+function CreateError({ status, message = messages[status] }) {
   const error = new Error(message);
 
   error.status = status;
@@ -14,4 +14,4 @@ function createError({ status, message = messages[status] }) {
   return error;
 }
 
-module.exports = { createError };
+module.exports = CreateError;

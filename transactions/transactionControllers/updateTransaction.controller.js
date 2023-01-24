@@ -1,23 +1,23 @@
-const Transaction = require("../../models/transactions/index");
+const TransactionService = require("../transactions.service");
 
-const { createError } = require("../../helpers/createError");
+const { CreateError } = require("../../helpers");
 
 async function updateTransaction(req, res) {
-  const { transactionId } = req.params;
-
-  const result = await Transaction.findOneAndUpdate(
-    { _id: transactionId },
-    req.body,
-    {
-      new: true,
-    }
-  );
+  const { id } = req.params;
+  const updateData = {
+    updator: req?.user?._id,
+    ...req.body,
+  };
+  const result = await TransactionService.updateTransactionById(id, updateData);
 
   if (!result) {
-    throw createError({ status: 404, message: "Not found" });
+    throw CreateError({ status: 404, message: "Not found" });
   }
 
-  res.status(200).send(result);
+  res.status(200).send({
+    message: `Updated`,
+    data: result,
+  });
 }
 
 module.exports = updateTransaction;

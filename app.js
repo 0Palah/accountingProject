@@ -3,8 +3,8 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const transactionsRouter = require("./routes/api/transactions");
 const usersRouter = require("./routes/api/users");
+const { TransactionsRouter } = require("./transactions");
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/transactions", transactionsRouter);
+app.use("/api/transactions", TransactionsRouter);
 app.use("/api/users", usersRouter);
 
 app.use((req, res) => {

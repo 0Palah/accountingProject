@@ -1,7 +1,7 @@
 const Joi = require("joi");
-const phoneRegexp = require("../helpers/validatePhone");
+// const phoneRegexp = require("../helpers/validatePhone");
 
-const addTransactionSchema = Joi.object({
+const addTransactionDto = Joi.object({
   athor: Joi.string(),
   creator: Joi.string(),
   auditor: Joi.string(),
@@ -23,7 +23,7 @@ const addTransactionSchema = Joi.object({
   comment: Joi.string(),
 });
 
-const updateTransactionSchema = Joi.object({
+const updateTransactionDto = Joi.object({
   athor: Joi.string(),
   creator: Joi.string(),
   auditor: Joi.string(),
@@ -45,4 +45,4 @@ const updateTransactionSchema = Joi.object({
   comment: Joi.string(),
 });
 
-module.exports = { addTransactionSchema, updateTransactionSchema };
+module.exports = { addTransactionDto, updateTransactionDto };

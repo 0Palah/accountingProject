@@ -1,49 +1,52 @@
 const express = require("express");
 
-const router = express.Router();
+const TransactionsRouter = express.Router();
+const middlewares = require("../middlewares");
 
-const controllers = require("../../controllers/transactions");
-const middlewares = require("../../middlewares");
-const schemas = require("../../schemas");
-const controllerWrapper = require("../../helpers/controllerWrapper");
+const { ControllerWrapper } = require("../helpers");
+const TransactionDto = require("./transaction.dto");
+const TransactionControllers = require("./transactionControllers");
 
-router.get(
+// console.log(TransactionDto);
+// console.log(TransactionControllers);
+
+TransactionsRouter.get(
   "/",
-  middlewares.authenticate,
-  controllerWrapper(controllers.getAll)
+  // middlewares.authenticate,
+  ControllerWrapper(TransactionControllers.getAll)
 );
 
-router.get(
-  "/:transactionId",
-  middlewares.authenticate,
-  controllerWrapper(controllers.getById)
+TransactionsRouter.get(
+  "/:id",
+  // middlewares.authenticate,
+  ControllerWrapper(TransactionControllers.getById)
 );
 
-router.post(
+TransactionsRouter.post(
   "/",
-  middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.addTransactionSchema),
-  controllerWrapper(controllers.addTransaction)
+  // middlewares.authenticate,
+  middlewares.validateBody(TransactionDto.addTransactionDto),
+  ControllerWrapper(TransactionControllers.addTransaction)
 );
 
-router.delete(
-  "/:transactionId",
-  middlewares.authenticate,
-  controllerWrapper(controllers.removeTransaction)
+TransactionsRouter.delete(
+  "/:id",
+  // middlewares.authenticate,
+  ControllerWrapper(TransactionControllers.removeTransaction)
 );
 
-router.patch(
-  "/:transactionId",
-  middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.updateTransactionSchema),
-  controllerWrapper(controllers.updateTransaction)
+TransactionsRouter.patch(
+  "/:id",
+  // middlewares.authenticate,
+  middlewares.validateBody(TransactionDto.updateTransactionDto),
+  ControllerWrapper(TransactionControllers.updateTransaction)
 );
 
-// router.patch(
+// TransactionsRouter.patch(
 //   "/:contactId/favorite",
 //   middlewares.authenticate,
 //   middlewares.validateBody(schemas.transactions.updateFavoriteByIdSchema),
-//   controllerWrapper(controllers.updateFavoriteById)
+//   controllerWrapper(TransactionControllers.updateFavoriteById)
 // );
 
-module.exports = router;
+module.exports = TransactionsRouter;
