@@ -29,7 +29,7 @@ router.post(
 router.delete(
   "/:transactionId",
   middlewares.authenticate,
-  controllerWrapper(controllers.removeContact)
+  controllerWrapper(controllers.removeTransaction)
 );
 
 router.put(
