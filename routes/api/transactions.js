@@ -14,7 +14,7 @@ router.get(
 );
 
 router.get(
-  "/:contactId",
+  "/:transactionId",
   middlewares.authenticate,
   controllerWrapper(controllers.getById)
 );
@@ -27,7 +27,7 @@ router.post(
 );
 
 router.delete(
-  "/:contactId",
+  "/:transactionId",
   middlewares.authenticate,
   controllerWrapper(controllers.removeContact)
 );
