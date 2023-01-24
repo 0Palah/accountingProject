@@ -32,18 +32,18 @@ router.delete(
   controllerWrapper(controllers.removeTransaction)
 );
 
-router.put(
-  "/:contactId",
+router.patch(
+  "/:transactionId",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.addTransactionSchema),
-  controllerWrapper(controllers.updateContact)
+  middlewares.validateBody(schemas.transactions.updateTransactionSchema),
+  controllerWrapper(controllers.updateTransaction)
 );
 
-router.patch(
-  "/:contactId/favorite",
-  middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.updateFavoriteByIdSchema),
-  controllerWrapper(controllers.updateFavoriteById)
-);
+// router.patch(
+//   "/:contactId/favorite",
+//   middlewares.authenticate,
+//   middlewares.validateBody(schemas.transactions.updateFavoriteByIdSchema),
+//   controllerWrapper(controllers.updateFavoriteById)
+// );
 
 module.exports = router;
