@@ -22,7 +22,7 @@ router.get(
 router.post(
   "/",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.addTransactionsSchema),
+  middlewares.validateBody(schemas.transactions.addTransactionSchema),
   controllerWrapper(controllers.addTransaction)
 );
 
@@ -35,7 +35,7 @@ router.delete(
 router.put(
   "/:contactId",
   middlewares.authenticate,
-  middlewares.validateBody(schemas.transactions.addTransactionsSchema),
+  middlewares.validateBody(schemas.transactions.addTransactionSchema),
   controllerWrapper(controllers.updateContact)
 );
 
