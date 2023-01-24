@@ -23,7 +23,7 @@ router.post(
   "/",
   middlewares.authenticate,
   middlewares.validateBody(schemas.transactions.addTransactionsSchema),
-  controllerWrapper(controllers.addContact)
+  controllerWrapper(controllers.addTransaction)
 );
 
 router.delete(

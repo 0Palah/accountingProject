@@ -1,4 +1,4 @@
-const Contact = require("../../models/contacts/index");
+const Contact = require("../../models/transactions/index");
 const { createError } = require("../../helpers/createError");
 
 async function removeContact(req, res) {

@@ -1,4 +1,4 @@
-const Contact = require("../../models/contacts/index");
+const Contact = require("../../models/transactions/index");
 
 async function getAll(req, res) {
   const { _id } = req.user;
