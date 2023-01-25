@@ -16,7 +16,7 @@ async function authenticate(req, res, next) {
     }
 
     const { id } = jwt.verify(token, JWT_SECRET_KEY);
-    console.log(id);
+
     // const user = await User.findById(id);
     const user = await UsersService.findUserById(id);
 

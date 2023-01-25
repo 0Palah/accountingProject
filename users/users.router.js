@@ -31,16 +31,8 @@ UsersRouter.post(
   controllerWrapper(controllers.logoutUser)
 );
 
-UsersRouter.patch(
-  "/avatars",
-  middlewares.authenticate,
-  middlewares.upload.single("avatar"),
-  controllerWrapper(controllers.updateAvatar)
-);
-
 UsersRouter.post(
   "/verify",
-  middlewares.authenticate,
   middlewares.validateBody(UserDto.resendVerificationEmail),
   controllerWrapper(controllers.resendVerificationEmail)
 );

@@ -23,10 +23,7 @@ async function addTransaction(req, res) {
     comment,
   } = req.body;
 
-  console.log(req.body);
   const { _id } = req.user;
-
-  console.log(_id);
 
   const result = await Transactions.create({
     athor,
