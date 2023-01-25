@@ -1,26 +1,26 @@
-const Contact = require("../../models/transactions/index");
+// const Contact = require("../../models/transactions/index");
 
-const { createError } = require("../../helpers/createError");
+// const { createError } = require("../../helpers/createError");
 
-async function updateFavoriteById(req, res) {
-  const { contactId } = req.params;
-  const { favorite } = req.body;
+// async function updateFavoriteById(req, res) {
+//   const { contactId } = req.params;
+//   const { favorite } = req.body;
 
-  const { _id } = req.user;
+//   const { _id } = req.user;
 
-  const result = await Contact.findOneAndUpdate(
-    { _id: contactId, owner: _id },
-    { favorite },
-    {
-      new: true,
-    }
-  );
+//   const result = await Contact.findOneAndUpdate(
+//     { _id: contactId, owner: _id },
+//     { favorite },
+//     {
+//       new: true,
+//     }
+//   );
 
-  if (!result) {
-    throw createError({ status: 404, message: "Not found" });
-  }
+//   if (!result) {
+//     throw createError({ status: 404, message: "Not found" });
+//   }
 
-  res.status(200).send(result);
-}
+//   res.status(200).send(result);
+// }
 
-module.exports = updateFavoriteById;
+// module.exports = updateFavoriteById;
