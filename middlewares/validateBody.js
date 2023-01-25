@@ -1,4 +1,4 @@
-const { createError } = require("../helpers/createError");
+const createError = require("../helpers/createError");
 const Joi = require("joi");
 
 function validateBody(schema) {

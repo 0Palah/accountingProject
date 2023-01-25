@@ -12,32 +12,32 @@ const TransactionControllers = require("./transactionControllers");
 
 TransactionsRouter.get(
   "/",
-  // middlewares.authenticate,
+  middlewares.authenticate,
   ControllerWrapper(TransactionControllers.getAll)
 );
 
 TransactionsRouter.get(
   "/:id",
-  // middlewares.authenticate,
+  middlewares.authenticate,
   ControllerWrapper(TransactionControllers.getById)
 );
 
 TransactionsRouter.post(
   "/",
-  // middlewares.authenticate,
+  middlewares.authenticate,
   middlewares.validateBody(TransactionDto.addTransactionDto),
   ControllerWrapper(TransactionControllers.addTransaction)
 );
 
 TransactionsRouter.delete(
   "/:id",
-  // middlewares.authenticate,
+  middlewares.authenticate,
   ControllerWrapper(TransactionControllers.removeTransaction)
 );
 
 TransactionsRouter.patch(
   "/:id",
-  // middlewares.authenticate,
+  middlewares.authenticate,
   middlewares.validateBody(TransactionDto.updateTransactionDto),
   ControllerWrapper(TransactionControllers.updateTransaction)
 );

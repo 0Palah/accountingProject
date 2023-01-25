@@ -7,9 +7,9 @@ const { DB_HOST, PORT } = process.env;
 
 async function start() {
   try {
-    // await mongoose.connect(DB_HOST);
+    await mongoose.connect(DB_HOST);
 
-    // console.log("Database connection successful");
+    console.log("Database connection successful");
 
     app.listen(PORT || 5000, () => {
       console.log(`Server running. Use our API on port: ${PORT || 5000}`);

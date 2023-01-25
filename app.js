@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const usersRouter = require("./routes/api/users");
+const { UsersRouter } = require("./users");
 const { TransactionsRouter } = require("./transactions");
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/transactions", TransactionsRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/users", UsersRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
