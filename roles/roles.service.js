@@ -1,18 +1,16 @@
-const createError = require("../helpers/createError");
+const { createError } = require("../helpers");
 
 const RoleModel = require("./roles.model");
 
 async function getAllRoles() {
   return RoleModel.find();
 }
-
 async function findRoleById(id) {
   return RoleModel.findById(id);
 }
 async function findRoleByName(name) {
   return RoleModel.findOne(name);
 }
-
 async function createRole(dto) {
   const { name } = dto;
 
@@ -24,7 +22,6 @@ async function createRole(dto) {
 
   return RoleModel.create({ name });
 }
-
 async function updateRoleById(id, updateData) {
   return RoleModel.findByIdAndUpdate(id, updateData, {
     new: true,

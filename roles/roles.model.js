@@ -8,7 +8,11 @@ const roleSchema = new Schema(
       unique: true,
     },
     routes: {
-      type: Array,
+      type: [
+        {
+          type: String,
+        },
+      ],
       required: [true, "Routes are required"],
     },
     description: {

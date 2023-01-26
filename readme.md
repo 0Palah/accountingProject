@@ -1,31 +1,51 @@
-## GoIT Node.js Course Template Homework
+var schema = new Schema({
+name: String,
+binary: Buffer,
+living: Boolean,
+updated: { type: Date, default: Date.now },
+age: { type: Number, min: 18, max: 65 },
+mixed: Schema.Types.Mixed,
+\_someId: Schema.Types.ObjectId,
+decimal: Schema.Types.Decimal128,
+array: [],
+ofString: [String],
+ofNumber: [Number],
+ofDates: [Date],
+ofBuffer: [Buffer],
+ofBoolean: [Boolean],
+ofMixed: [Schema.Types.Mixed],
+ofObjectId: [Schema.Types.ObjectId],
+ofArrays: [[]],
+  ofArrayOfNumbers: [[Number]],
+nested: {
+stuff: { type: String, lowercase: true, trim: true }
+},
+map: Map,
+mapOfString: {
+type: Map,
+of: String
+}
+})
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+// example use
 
-Додайте ментора до колаборації
+var Thing = mongoose.model('Thing', schema);
 
-Для кожної домашньої роботи створюйте свою гілку.
-
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
-
-Кожна нова гілка для др повинна робитися з master
-
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
-
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
-
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
-
-### Команди:
-
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+var m = new Thing;
+m.name = 'Statue of Liberty';
+m.age = 125;
+m.updated = new Date;
+m.binary = Buffer.alloc(0);
+m.living = false;
+m.mixed = { any: { thing: 'i want' } };
+m.markModified('mixed');
+m.\_someId = new mongoose.Types.ObjectId;
+m.array.push(1);
+m.ofString.push("strings!");
+m.ofNumber.unshift(1,2,3,4);
+m.ofDates.addToSet(new Date);
+m.ofBuffer.pop();
+m.ofMixed = [1, [], 'three', { four: 5 }];
+m.nested.stuff = 'good';
+m.map = new Map([['key', 'value']]);
+m.save(callback);

@@ -1,7 +1,7 @@
-const CreateError = require("./createError");
-const ControllerWrapper = require("./controllerWrapper");
+const createError = require("./createError");
+const controllerWrapper = require("./controllerWrapper");
 
 module.exports = {
-  CreateError,
-  ControllerWrapper,
+  createError,
+  controllerWrapper,
 };
