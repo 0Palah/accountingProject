@@ -5,9 +5,9 @@ const createError = require("../helpers/createError");
 const SendEmail = require("../email");
 const UserMessages = require("./user.messages");
 
-const { BASE_URL, JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env;
-
 const UserModel = require("./user.model");
+
+const { BASE_URL, JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env;
 
 async function findUserById(id) {
   return UserModel.findById(id);
@@ -66,6 +66,7 @@ async function loginUser(dto) {
 
   const payload = {
     id: user.id,
+    role: user.role,
   };
 
   const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "10d" });
@@ -113,6 +114,29 @@ async function resendVerificationEmail(email) {
   await SendEmail.SendSgEmail(message);
 }
 
+async function refreshToken(id) {
+  const user = await findUserById(id);
+
+  if (!user) {
+    throw createError({ status: 401, message: UserMessages.NOT_AUTHORIZED });
+  }
+
+  const payload = {
+    id: user.id,
+    role: user.role,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "10d" });
+  const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
+    expiresIn: "30d",
+  });
+
+  return findUserByIdAndUpdate(user.id, {
+    token,
+    refreshToken,
+  });
+}
+
 async function verifyEmail(verificationToken) {
   const user = await findOneUser({ verificationToken });
 
@@ -137,4 +161,5 @@ module.exports = {
   loginUser,
   resendVerificationEmail,
   verifyEmail,
+  refreshToken,
 };

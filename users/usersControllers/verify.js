@@ -1,7 +1,5 @@
 const UserMessages = require("../user.messages");
 const UsersService = require("../users.service");
-// const createError = require("../../helpers/createError");
-// const UserModel = require("../user.model");
 
 async function verify(req, res) {
   const { verificationToken } = req.params;
