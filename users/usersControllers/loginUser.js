@@ -1,54 +1,24 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-// const cookieParser = require("cookie-parser");
-
-const createError = require("../../helpers/createError");
-const UserModel = require("../user.model");
-
-const { JWT_SECRET_KEY } = process.env;
-const { JWT_REFRESH_SECRET_KEY } = process.env;
+const UsersService = require("../users.service");
+const UserMessages = require("../user.messages");
 
 async function loginUser(req, res) {
   const { password, email } = req.body;
 
-  const user = await UserModel.findOne({ email });
-
-  if (!user) {
-    throw createError({ status: 401, message: "Email or password is wrong" });
-  }
-
-  if (!user.status) {
-    throw createError({
-      status: 401,
-      message: "User not verified. Please verify you email",
-    });
-  }
-
-  const passwordCompare = await bcrypt.compare(password, user.password);
-
-  if (!passwordCompare) {
-    throw createError({ status: 401, message: "Email or password is wrong" });
-  }
-
-  const payload = {
-    id: user.id,
-  };
-
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "10d" });
-  const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
-    expiresIn: "30d",
+  const { token, refreshToken } = await UsersService.loginUser({
+    password,
+    email,
   });
-
-  const userData = await UserModel.findByIdAndUpdate(
-    user.id,
-    { token, refreshToken },
-    { new: true }
-  );
 
   res.cookie("refreshToken", refreshToken, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   });
-  res.json({ token, refreshToken });
+
+  res.json({
+    message: UserMessages.LOGGED_IN,
+    data: {
+      token,
+    },
+  });
 }
 module.exports = loginUser;

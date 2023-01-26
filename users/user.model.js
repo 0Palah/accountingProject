@@ -9,14 +9,14 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    password: {
+    hashPassword: {
       type: String,
       minlength: 8,
       required: [true, "Set password for user"],
     },
     role: {
       type: String,
-      enum: ["user", "moderator", "admin"],
+      enum: ["user", "moderator", "administrator"],
       default: "user",
     },
     token: {

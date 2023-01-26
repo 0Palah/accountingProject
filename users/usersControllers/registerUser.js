@@ -1,67 +1,18 @@
-// const bcrypt = require("bcryptjs");
-// const { randomUUID } = require("crypto");
-// const createError = require("../../helpers/createError");
-// const UserModel = require("../user.model");
 const UsersService = require("../users.service");
-const sendSgEmail = require("../../helpers/sendSgEmail");
-
-const { BASE_URL } = process.env;
+const UserMessages = require("../user.messages");
 
 async function registerUser(req, res) {
-  const { password, email, role } = req.body;
+  const { password, email } = req.body;
 
-  const result = await UsersService.registerUser({ password, email, role });
-
-  const message = {
-    to: email,
-    subject: "Email verification",
-    html: `<a href="${BASE_URL}/api/users/verify/${result.verificationToken}">Click to verify your email</a>`,
-  };
-
-  await sendSgEmail(message);
+  const result = await UsersService.registerUser({ password, email });
 
   res.status(201).json({
-    message: "User created successfully",
+    message: UserMessages.CREATING_SUCCESS,
     data: {
       email: result.email,
       role: result.role,
     },
   });
 }
-
-// async function registerUser(req, res) {
-//   const { password, email, role } = req.body;
-
-//   const user = await UserModel.findOne({ email });
-
-//   if (user) {
-//     throw createError({ status: 409, message: "Email in use" });
-//   }
-
-//   const hashPassword = await bcrypt.hash(password, 10);
-
-//   const verificationToken = randomUUID();
-
-//   const result = await UserModel.create({
-//     password: hashPassword,
-//     email,
-//     role,
-//     verificationToken,
-//   });
-
-//   const message = {
-//     to: email,
-//     subject: "Email verification",
-//     html: `<a href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your email</a>`,
-//   };
-
-//   await sendSgEmail(message);
-
-//   res.status(201).json({
-//     email: result.email,
-//     password: result.password,
-//     role: result.role,
-//   });
-// }
 
 module.exports = registerUser;

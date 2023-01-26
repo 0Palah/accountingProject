@@ -4,7 +4,7 @@ const emailRegexp = require("../helpers/validateEmail");
 const registerUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(8).required(),
-  role: Joi.string().valid("user", "moderator", "admin"),
+  // role: Joi.string().valid("user", "moderator", "administrator"),
 });
 
 const loginUserSchema = Joi.object({

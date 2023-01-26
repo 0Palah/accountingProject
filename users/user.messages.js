@@ -5,10 +5,20 @@ const NOT_VERIFY_EMAIL = (email) =>
 
 const NOT_FOUND_USER = "Email or password is wrong";
 
-const CREATING_SUCCESS = `Transaction created duccessfuly`;
+const CREATING_SUCCESS = `User created successfully`;
+
+const CURRENT_USER = `Current user`;
+
+const VERIFY_YOUR_EMAIL = `User not verified. Please verify your email`;
+
+const LOGGED_IN = `User is logged in`;
 
 module.exports = {
   EMAIL_IN_USE,
   NOT_VERIFY_EMAIL,
   CREATING_SUCCESS,
+  NOT_FOUND_USER,
+  CURRENT_USER,
+  VERIFY_YOUR_EMAIL,
+  LOGGED_IN,
 };
