@@ -1,15 +1,14 @@
-const EMAIL_IN_USE = `Email in use`;
+const ROLE_NAME_IN_USE = `Role name in use`;
 
-const NOT_VERIFY_EMAIL = (email) =>
-  `User with email${email}. Please verify you email`;
+// const NOT_VERIFY_EMAIL = (email) =>
+//   `User with email${email}. Please verify you email`;
 
-const NOT_FOUND_USER = "Email or password is wrong";
+const NOT_FOUND_ROLE = "Email or password is wrong";
 
-const CREATING_SUCCESS = `Transaction created duccessfuly`;
+const CREATING_SUCCESS = `Role created duccessfuly`;
 
 module.exports = {
-  EMAIL_IN_USE,
-  NOT_VERIFY_EMAIL,
+  ROLE_NAME_IN_USE,
   CREATING_SUCCESS,
-  NOT_FOUND_USER,
+  NOT_FOUND_ROLE,
 };

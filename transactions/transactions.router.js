@@ -3,7 +3,7 @@ const express = require("express");
 const TransactionsRouter = express.Router();
 const middlewares = require("../middlewares");
 
-const { ControllerWrapper } = require("../helpers");
+const { controllerWrapper } = require("../helpers");
 const TransactionDto = require("./transaction.dto");
 const TransactionControllers = require("./transactionControllers");
 
@@ -11,35 +11,35 @@ const TransactionControllers = require("./transactionControllers");
 // console.log(TransactionControllers);
 
 TransactionsRouter.get(
-  "/",
+  "/getAll",
   middlewares.authenticate,
-  ControllerWrapper(TransactionControllers.getAll)
+  controllerWrapper(TransactionControllers.getAll)
 );
 
 TransactionsRouter.get(
   "/:id",
   middlewares.authenticate,
-  ControllerWrapper(TransactionControllers.getById)
+  controllerWrapper(TransactionControllers.getById)
 );
 
 TransactionsRouter.post(
-  "/",
+  "/create",
   middlewares.authenticate,
   middlewares.validateBody(TransactionDto.addTransactionDto),
-  ControllerWrapper(TransactionControllers.addTransaction)
+  controllerWrapper(TransactionControllers.addTransaction)
 );
 
 TransactionsRouter.delete(
   "/:id",
   middlewares.authenticate,
-  ControllerWrapper(TransactionControllers.removeTransaction)
+  controllerWrapper(TransactionControllers.removeTransaction)
 );
 
 TransactionsRouter.patch(
   "/:id",
   middlewares.authenticate,
   middlewares.validateBody(TransactionDto.updateTransactionDto),
-  ControllerWrapper(TransactionControllers.updateTransaction)
+  controllerWrapper(TransactionControllers.updateTransaction)
 );
 
 // TransactionsRouter.patch(

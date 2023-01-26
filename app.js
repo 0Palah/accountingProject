@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const { UsersRouter } = require("./users");
 const { TransactionsRouter } = require("./transactions");
+const { RolesRouter } = require("./roles");
 
 const app = express();
 
@@ -17,8 +18,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/transactions", TransactionsRouter);
 app.use("/api/users", UsersRouter);
+app.use("/api/roles", RolesRouter);
+app.use("/api/transactions", TransactionsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
