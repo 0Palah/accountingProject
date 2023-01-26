@@ -86,10 +86,38 @@ async function findOneUser(dto) {
   return UserModel.findOne(dto);
 }
 
+async function resendVerificationEmail(email) {
+  const user = await findOneUser(email);
+
+  if (!email) {
+    throw createError({ status: 400, message: "Missing required field email" });
+  }
+
+  if (!user) {
+    throw createError({ status: 404, message: UserMessages.NOT_FOUND_USER });
+  }
+
+  if (user.status) {
+    throw createError({
+      status: 400,
+      message: "Verification has already been passed",
+    });
+  }
+
+  const message = {
+    to: email,
+    subject: "Email verification",
+    html: `<a href="${BASE_URL}/api/users/verify/${user.verificationToken}">Click to verify your email</a>`,
+  };
+
+  await SendEmail.SendSgEmail(message);
+}
+
 module.exports = {
   findUserById,
   findUserByIdAndUpdate,
   findOneUser,
   registerUser,
   loginUser,
+  resendVerificationEmail,
 };

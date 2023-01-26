@@ -1,4 +1,3 @@
-const UserModel = require("../user.model");
 const UsersService = require("../users.service");
 
 async function logoutUser(req, res) {
