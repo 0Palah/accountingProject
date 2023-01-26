@@ -113,6 +113,22 @@ async function resendVerificationEmail(email) {
   await SendEmail.SendSgEmail(message);
 }
 
+async function verifyEmail(verificationToken) {
+  const user = await findOneUser({ verificationToken });
+
+  if (!user) {
+    throw new createError({
+      status: 404,
+      message: UserMessages.USER_NOT_FOUND_OR_VERIFIED,
+    });
+  }
+
+  await findUserByIdAndUpdate(user._id, {
+    status: true,
+    verificationToken: "",
+  });
+}
+
 module.exports = {
   findUserById,
   findUserByIdAndUpdate,
@@ -120,4 +136,5 @@ module.exports = {
   registerUser,
   loginUser,
   resendVerificationEmail,
+  verifyEmail,
 };

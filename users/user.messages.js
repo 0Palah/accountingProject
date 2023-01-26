@@ -13,6 +13,10 @@ const VERIFY_YOUR_EMAIL = `User not verified. Please verify your email`;
 
 const LOGGED_IN = `User is logged in`;
 
+const USER_NOT_FOUND_OR_VERIFIED = `User not found or already verified`;
+
+const VERIFICATION_SUCCESSFUL = `Verification successful`;
+
 module.exports = {
   EMAIL_IN_USE,
   NOT_VERIFY_EMAIL,
@@ -21,4 +25,6 @@ module.exports = {
   CURRENT_USER,
   VERIFY_YOUR_EMAIL,
   LOGGED_IN,
+  USER_NOT_FOUND_OR_VERIFIED,
+  VERIFICATION_SUCCESSFUL,
 };

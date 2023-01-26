@@ -4,7 +4,6 @@ const UsersService = require("../users.service");
 // const cookieParser = require("cookie-parser");
 
 const { createError } = require("../../helpers/createError");
-// const User = require("../../models/users");
 
 const { JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env;
 
@@ -26,14 +25,14 @@ async function refreshToken(req, res) {
     expiresIn: "30d",
   });
 
-  const userData = await UsersService.findUserByIdAndUpdate(user.id, {
+  await UsersService.findUserByIdAndUpdate(user.id, {
     token,
     refreshToken,
   });
 
   res.cookie("refreshToken", refreshToken, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    // httpOnly: true,
+    httpOnly: true,
   });
   res.json({ token, refreshToken });
 }
