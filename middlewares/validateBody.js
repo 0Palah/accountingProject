@@ -1,5 +1,4 @@
 const createError = require("../helpers/createError");
-const Joi = require("joi");
 
 function validateBody(schema) {
   const fn = (req, res, next) => {

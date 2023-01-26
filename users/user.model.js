@@ -16,8 +16,8 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "moderator", "admin"],
-      default: "user",
+      enum: ["USER", "MODERATOR", "ADMIN", "MANAGER"],
+      default: "USER",
     },
     token: {
       type: String,
@@ -27,7 +27,7 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    status: {
+    isActive: {
       type: Boolean,
       default: false,
     },

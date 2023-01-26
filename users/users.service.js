@@ -9,7 +9,7 @@ async function findUserById(id) {
 }
 
 async function registerUser(dto) {
-  const { password, email, role } = dto;
+  const { password, email } = dto;
 
   const user = await findOneUser({ email });
 
@@ -24,7 +24,6 @@ async function registerUser(dto) {
   return UserModel.create({
     password: hashPassword,
     email,
-    role,
     verificationToken,
   });
 }
@@ -45,3 +44,4 @@ module.exports = {
   findOneUser,
   registerUser,
 };
+// 1FDK7xRFHUN8Gc1o
