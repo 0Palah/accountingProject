@@ -1,4 +1,4 @@
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const transactionSchema = new Schema(
   {
@@ -12,22 +12,23 @@ const transactionSchema = new Schema(
       type: String,
     },
     transactionDate: {
-      type: String,
+      type: Date,
+      default: new Date(),
     },
     type: {
       type: String,
-      enum: ["income", "expense", "transfer"],
+      enum: ["INCOME", "EXPENCE", "TRANSFER"],
     },
-    countId: {
+    countIdIn: {
       type: String,
     },
-    subCountId: {
+    subCountIdIn: {
       type: String,
     },
-    transferCountId: {
+    countIdOut: {
       type: String,
     },
-    transferSubCountIdTo: {
+    subCountIdOut: {
       type: String,
     },
     categoryId: {
@@ -37,6 +38,9 @@ const transactionSchema = new Schema(
       type: String,
     },
     document: {
+      type: String,
+    },
+    innerDocument: {
       type: String,
     },
     project: {
@@ -55,7 +59,12 @@ const transactionSchema = new Schema(
       type: String,
     },
     tags: {
-      type: String,
+      type: [
+        {
+          type: String,
+        },
+      ],
+      eachPath: true,
     },
     comment: {
       type: String,
@@ -70,3 +79,79 @@ const transactionSchema = new Schema(
 const TransactionModel = model("transaction", transactionSchema);
 
 module.exports = TransactionModel;
+
+// const transactionSchema = new Schema(
+//   {
+//     athor: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     creator: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     auditor: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     transactionDate: {
+//       type: Date,
+//       default: new Date(),
+//     },
+//     type: {
+//       type: String,
+//       enum: ["INCOME", "EXPENCE", "TRANSFER"],
+//     },
+//     countIdIn: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     subCountIdIn: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     countIdOut: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     subCountIdOut: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     categoryId: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     subCategoryId: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     document: {
+//       type: String,
+//     },
+//     innerDocument: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     project: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     customer: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     amount: {
+//       type: Number,
+//     },
+//     status: {
+//       type: SchemaTypes.ObjectId,
+//     },
+//     mark: {
+//       type: String,
+//     },
+//     tags: {
+//       type: [
+//         {
+//           type: String,
+//         },
+//       ],
+//       eachPath: true,
+//     },
+//     comment: {
+//       type: String,
+//     },
+//   },
+//   {
+//     versionKey: false,
+//     timestamps: true,
+//   }
+// );

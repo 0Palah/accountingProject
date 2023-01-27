@@ -11,8 +11,8 @@ async function findRoleById(id) {
 async function findRoleByName(name) {
   return RoleModel.findOne(name);
 }
-async function createRole(dto) {
-  const { name } = dto;
+async function createRole(newRole) {
+  const { name } = newRole;
 
   const role = await findRoleByName({ name });
 
@@ -20,12 +20,33 @@ async function createRole(dto) {
     throw createError({ status: 409, message: "Role already exist" });
   }
 
-  return RoleModel.create({ name });
+  return RoleModel.create(newRole);
+}
+async function deleteRoleById(id) {
+  return RoleModel.findByIdAndDelete(id);
 }
 async function updateRoleById(id, updateData) {
   return RoleModel.findByIdAndUpdate(id, updateData, {
     new: true,
   });
+}
+async function addActionsToRoleById(id, routes) {
+  return RoleModel.findByIdAndUpdate(
+    id,
+    { $addToSet: { routes: { $each: routes } } },
+    {
+      new: true,
+    }
+  );
+}
+async function removeActionsFromRoleById(id, routes) {
+  return RoleModel.findByIdAndUpdate(
+    id,
+    { $pull: { routes: { $in: routes } } }, // { fruits: { $in: [ "apples", "oranges" ] }
+    {
+      new: true,
+    }
+  );
 }
 
 module.exports = {
@@ -34,4 +55,7 @@ module.exports = {
   findRoleByName,
   createRole,
   updateRoleById,
+  deleteRoleById,
+  addActionsToRoleById,
+  removeActionsFromRoleById,
 };

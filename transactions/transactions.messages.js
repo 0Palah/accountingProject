@@ -1,7 +1,7 @@
 const NOT_FOUND_TRANSACTIONS = `Not found any transations`;
 const NOT_FOUND_TRANSACTION_BY_ID = (id) =>
   `Not found any transactions with id:${id}`;
-const CREATING_SUCCESS = `Transaction created duccessfuly`;
+const CREATING_SUCCESS = `Transaction created successfully`;
 
 module.exports = {
   CREATING_SUCCESS,

@@ -12,27 +12,27 @@ const TransactionControllers = require("./transactionControllers");
 
 TransactionsRouter.get(
   "/getAll",
-  middlewares.authenticate,
+  // middlewares.authenticate,
   controllerWrapper(TransactionControllers.getAll)
 );
 
 TransactionsRouter.get(
   "/:id",
-  middlewares.authenticate,
+  // middlewares.authenticate,
   controllerWrapper(TransactionControllers.getById)
 );
 
 TransactionsRouter.post(
   "/create",
-  middlewares.authenticate,
+  // middlewares.authenticate,
   middlewares.validateBody(TransactionDto.addTransactionDto),
   controllerWrapper(TransactionControllers.addTransaction)
 );
 
 TransactionsRouter.delete(
   "/:id",
-  middlewares.authenticate,
-  controllerWrapper(TransactionControllers.removeTransaction)
+  // middlewares.authenticate,
+  controllerWrapper(TransactionControllers.deleteTransactionById)
 );
 
 TransactionsRouter.patch(

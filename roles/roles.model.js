@@ -11,9 +11,10 @@ const roleSchema = new Schema(
       type: [
         {
           type: String,
+          unique: true,
         },
       ],
-      required: [true, "Routes are required"],
+      default: [],
     },
     description: {
       type: String,

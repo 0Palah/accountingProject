@@ -2,10 +2,10 @@ const TransactionService = require("../transactions.service");
 const TransactionMessages = require("../transactions.messages");
 
 async function addTransaction(req, res) {
-  const { _id = "0000000" } = req.user;
+  // const { id = "0000000" } = req?.user;
 
   const newTransactionData = {
-    author: _id,
+    author: req?.user?.id || "0000000",
     ...req.body,
   };
 
