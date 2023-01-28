@@ -1,17 +1,14 @@
+const TransactionMessages = require("../transactions.messages");
 const TransactionService = require("../transactions.service");
 
 async function getAllTransaction(req, res) {
-  const { _id } = req.user;
-
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
   const paginationSettings = {
     limit,
     skip,
   };
-  const searchParams = {
-    owner: _id,
-  };
+  const searchParams = {};
 
   const allTransactions = await TransactionService.getAllTransactions(
     searchParams,
@@ -19,7 +16,7 @@ async function getAllTransaction(req, res) {
   );
 
   res.json({
-    message: "All transactions",
+    message: TransactionMessages?.FOUND_TRANSACTIONS(allTransactions.length),
     data: allTransactions,
   });
 }

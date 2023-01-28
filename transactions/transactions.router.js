@@ -26,13 +26,26 @@ TransactionsRouter.post(
   "/create",
   // middlewares.authenticate,
   middlewares.validateBody(TransactionDto.addTransactionDto),
-  controllerWrapper(TransactionControllers.addTransaction)
+  controllerWrapper(TransactionControllers.createTransaction)
+);
+
+TransactionsRouter.post(
+  "/createMany",
+  // middlewares.authenticate,
+  middlewares.validateBody(TransactionDto.addManyTransactionsDto),
+  controllerWrapper(TransactionControllers.createManyTransactions)
 );
 
 TransactionsRouter.delete(
-  "/:id",
+  "/delete/:id",
   // middlewares.authenticate,
   controllerWrapper(TransactionControllers.deleteTransactionById)
+);
+TransactionsRouter.delete(
+  "/deleteManyById",
+  // middlewares.authenticate,
+  middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  controllerWrapper(TransactionControllers.deleteManyTrById)
 );
 
 TransactionsRouter.patch(
@@ -41,12 +54,5 @@ TransactionsRouter.patch(
   middlewares.validateBody(TransactionDto.updateTransactionDto),
   controllerWrapper(TransactionControllers.updateTransaction)
 );
-
-// TransactionsRouter.patch(
-//   "/:contactId/favorite",
-//   middlewares.authenticate,
-//   middlewares.validateBody(schemas.transactions.updateFavoriteByIdSchema),
-//   controllerWrapper(TransactionControllers.updateFavoriteById)
-// );
 
 module.exports = TransactionsRouter;

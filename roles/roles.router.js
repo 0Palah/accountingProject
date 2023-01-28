@@ -13,12 +13,6 @@ RolesRouter.get(
   controllerWrapper(RoleControllers.getAllRoles)
 );
 
-// RolesRouter.get(
-//   "/:id",
-//   // middlewares.authenticate,
-//   controllerWrapper(RoleControllers.createRole)
-// );
-
 RolesRouter.post(
   "/create",
   // middlewares.authenticate,
@@ -38,6 +32,7 @@ RolesRouter.patch(
   middlewares.validateBody(RoleDto.updateRoleDto),
   controllerWrapper(RoleControllers.addActionsToRoleById)
 );
+
 RolesRouter.patch(
   "/removeActions/:id",
   // middlewares.authenticate,

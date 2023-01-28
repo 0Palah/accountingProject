@@ -18,6 +18,13 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(
+  "/api/",
+  express.Router().get("/", (req, res) => {
+    console.log(req);
+    res.status(200).json({ message: "Hello" });
+  })
+);
 app.use("/api/users", UsersRouter);
 app.use("/api/roles", RolesRouter);
 app.use("/api/transactions", TransactionsRouter);

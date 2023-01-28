@@ -1,13 +1,17 @@
-const addTransaction = require("./addTransaction.controller");
-const getAll = require("./getAllTransactions.controller");
-const getById = require("./getTransactionsById.controller");
-const deleteTransactionById = require("./deleteTransaction.controller");
-const updateTransaction = require("./updateTransaction.controller");
+const getAll = require("./getAllTrs.controller");
+const getTrById = require("./getTrById.controller");
+const createTransaction = require("./createTr.controller");
+const deleteTransactionById = require("./deleteTr.controller");
+const updateTransaction = require("./updateTr.controller");
+const createManyTransactions = require("./createManyTrs.controller");
+const deleteManyTrById = require("./deleteManyTrById.controller");
 
 module.exports = {
   getAll,
-  getById,
-  addTransaction,
+  getTrById,
+  createTransaction,
+  createManyTransactions,
   deleteTransactionById,
   updateTransaction,
+  deleteManyTrById,
 };

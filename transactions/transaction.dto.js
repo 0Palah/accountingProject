@@ -1,12 +1,14 @@
 const Joi = require("joi");
 // const phoneRegexp = require("../helpers/validatePhone");
 
-const addTransactionDto = Joi.object({
+const TransactionsConstants = require("./transactions.constants");
+
+const createTrDtoSet = {
   athor: Joi.string(),
   editor: Joi.string(),
   auditor: Joi.string(),
   transactionDate: Joi.string().required(),
-  type: Joi.string().valid("INCOME", "EXPENSE", "TRANSFER"),
+  type: Joi.string().valid(...TransactionsConstants.TransactionsTypeEnum),
   countIdIn: Joi.string(),
   subCountIdIn: Joi.string(),
   countIdOut: Joi.string(),
@@ -22,14 +24,25 @@ const addTransactionDto = Joi.object({
   mark: Joi.string(),
   tags: Joi.array().min(1),
   comment: Joi.string(),
-});
+};
+
+const addTransactionDto = Joi.object(createTrDtoSet);
+
+const addManyTransactionsDto = Joi.array()
+  .items(Joi.object(createTrDtoSet))
+  .min(1)
+  .max(10);
 
 const updateTransactionDto = Joi.object({
   athor: Joi.string(),
   editor: Joi.string(),
   auditor: Joi.string(),
   transactionDate: Joi.string().required(),
-  type: Joi.string().valid("INCOME", "EXPENSE", "TRANSFER"),
+  type: Joi.string().valid(
+    TransactionsConstants.INCOME,
+    TransactionsConstants.EXPENSE,
+    TransactionsConstants.TRANSFER
+  ),
   countIdIn: Joi.string(),
   subCountIdIn: Joi.string(),
   countIdOut: Joi.string(),
@@ -47,4 +60,11 @@ const updateTransactionDto = Joi.object({
   comment: Joi.string(),
 });
 
-module.exports = { addTransactionDto, updateTransactionDto };
+const deleteManyTrsDto = Joi.array().items(Joi.string()).min(1);
+
+module.exports = {
+  addTransactionDto,
+  updateTransactionDto,
+  addManyTransactionsDto,
+  deleteManyTrsDto,
+};

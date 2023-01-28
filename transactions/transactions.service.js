@@ -4,8 +4,11 @@ async function getAllTransactions() {
   return TransactionModel.find().exec();
 }
 
-async function addTransaction(dto) {
+async function createTransaction(dto) {
   return TransactionModel.create(dto);
+}
+async function createManyTrs(trsArrData) {
+  return TransactionModel.insertMany(trsArrData);
 }
 
 async function updateTransactionById(id, updateData) {
@@ -27,11 +30,16 @@ async function findTransactionById(id) {
 async function deleteTransactionById(id) {
   return TransactionModel.findByIdAndRemove(id);
 }
+async function deleteManyTrById(idsArrData) {
+  return TransactionModel.deleteMany({ _id: { $in: idsArrData } });
+}
 
 module.exports = {
   getAllTransactions,
-  addTransaction,
+  createTransaction,
   findTransactionById,
   updateTransactionById,
   deleteTransactionById,
+  createManyTrs,
+  deleteManyTrById,
 };

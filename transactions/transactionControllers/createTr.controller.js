@@ -1,7 +1,8 @@
 const TransactionService = require("../transactions.service");
 const TransactionMessages = require("../transactions.messages");
+const { createError } = require("../../helpers");
 
-async function addTransaction(req, res) {
+async function createTransaction(req, res) {
   // const { id = "0000000" } = req?.user;
 
   const newTransactionData = {
@@ -11,12 +12,15 @@ async function addTransaction(req, res) {
 
   console.log("newTransaction", newTransactionData);
 
-  const newTransaction = await TransactionService.addTransaction(
+  const newTransaction = await TransactionService.createTransaction(
     newTransactionData
   );
 
   if (!newTransaction) {
-    throw new Error();
+    throw createError({
+      status: 400,
+      messages: TransactionMessages.CREATING_ERROR,
+    });
   }
 
   res.status(201).send({
@@ -25,4 +29,4 @@ async function addTransaction(req, res) {
   });
 }
 
-module.exports = addTransaction;
+module.exports = createTransaction;

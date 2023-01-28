@@ -1,6 +1,6 @@
 const TransactionService = require("../transactions.service");
 const TransactionMessages = require("../transactions.messages");
-const { CreateError } = require("../../helpers");
+const { createError } = require("../../helpers");
 
 async function getById(req, res) {
   const { id } = req.params;
@@ -8,7 +8,7 @@ async function getById(req, res) {
   const result = await TransactionService.getById(id);
 
   if (!result) {
-    throw CreateError({ status: 404, message: "Not found" });
+    throw createError({ status: 404, message: "Not found" });
   }
 
   res.json({

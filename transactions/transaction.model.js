@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const TransactionsConstants = require("./transactions.constants");
 
 const transactionSchema = new Schema(
   {
@@ -17,7 +18,7 @@ const transactionSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["INCOME", "EXPENCE", "TRANSFER"],
+      enum: TransactionsConstants.TransactionsTypeEnum,
     },
     countIdIn: {
       type: String,
