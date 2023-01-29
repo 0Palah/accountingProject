@@ -33,4 +33,4 @@ async function authenticateRefreshToken(req, res, next) {
   }
 }
 
-module.exports = { authenticateRefreshToken };
+module.exports = authenticateRefreshToken;

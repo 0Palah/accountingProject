@@ -4,7 +4,7 @@ const RolesRouter = express.Router();
 const middlewares = require("../middlewares");
 
 const { controllerWrapper } = require("../helpers");
-const RoleDto = require("./roles.dto");
+const RoleDto = require("./role.dto");
 const RoleControllers = require("./roles.controller");
 
 RolesRouter.get(

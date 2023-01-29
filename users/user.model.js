@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const emailRegexp = require("../helpers/validateEmail");
+const { userRolesEnum } = require("./user.constants");
 
 const userSchema = new Schema(
   {
@@ -16,7 +17,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["USER", "MODERATOR", "ADMIN", "MANAGER"],
+      enum: userRolesEnum,
       default: "USER",
     },
     token: {

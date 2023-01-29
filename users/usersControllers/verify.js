@@ -1,4 +1,4 @@
-const createError = require("../../helpers/createError");
+const { createError } = require("../../helpers");
 const UserModel = require("../user.model");
 
 async function verify(req, res) {
@@ -7,7 +7,7 @@ async function verify(req, res) {
   const user = await UserModel.findOne({ verificationToken });
 
   if (!user) {
-    throw new createError({
+    throw createError({
       status: 404,
       message: "User not found or already verified",
     });

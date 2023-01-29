@@ -1,6 +1,6 @@
 const { createError } = require("../helpers");
 
-const RoleModel = require("./roles.model");
+const RoleModel = require("./role.model");
 
 async function getAllRoles() {
   return RoleModel.find();

@@ -1,6 +1,13 @@
 const createError = require("../helpers/createError");
 
 function validateBody(schema) {
+  if (!schema) {
+    throw createError({
+      status: 500,
+      message: "schema not passed ============= >>>>>>>>>>>>",
+    });
+  }
+
   const fn = (req, res, next) => {
     const { error } = schema.validate(req.body);
 
@@ -14,4 +21,4 @@ function validateBody(schema) {
   return fn;
 }
 
-module.exports = { validateBody };
+module.exports = validateBody;

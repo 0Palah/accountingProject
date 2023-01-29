@@ -27,7 +27,7 @@ UsersRouter.get(
 
 UsersRouter.post(
   "/logout",
-  middlewares.authenticate,
+  middlewares.authenticateRefreshToken,
   controllerWrapper(controllers.logoutUser)
 );
 

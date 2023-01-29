@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { ROLE_MODEL_NAME } = require("./roles.constants");
 
 const roleSchema = new Schema(
   {
@@ -26,6 +27,6 @@ const roleSchema = new Schema(
   }
 );
 
-const RoleModel = model("role", roleSchema);
+const RoleModel = model(ROLE_MODEL_NAME, roleSchema);
 
 module.exports = RoleModel;
