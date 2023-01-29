@@ -41,13 +41,10 @@ const transactionSchema = new Schema(
     document: {
       type: String,
     },
-    innerDocument: {
-      type: String,
-    },
     project: {
       type: String,
     },
-    customer: {
+    contractor: {
       type: String,
     },
     amount: {
@@ -78,8 +75,11 @@ const transactionSchema = new Schema(
 );
 
 const TransactionModel = model("transaction", transactionSchema);
-
 module.exports = TransactionModel;
+
+// const CreateTransactionModel = (copanyId) =>
+//   model("transaction", transactionSchema, `transactions_${copanyId}`);
+// const TransactionModel_ = CreateTransactionModel("021542");
 
 // const transactionSchema = new Schema(
 //   {
@@ -156,3 +156,5 @@ module.exports = TransactionModel;
 //     timestamps: true,
 //   }
 // );
+// const TransactionModel = (collection) =>
+//   model("transaction", transactionSchema, collection);

@@ -1,7 +1,30 @@
 const TransactionModel = require("./transaction.model");
+// db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } )
 
 async function getAllTransactions() {
   return TransactionModel.find().exec();
+}
+async function getAllTrsByCountIds(idsArrData) {
+  console.log("service", idsArrData);
+  return TransactionModel.find({
+    $or: [
+      { countIdIn: { $in: idsArrData } },
+      { countIdOut: { $in: idsArrData } },
+    ],
+  }).exec();
+}
+async function getAllTrsBySubCountIds(idsArrData) {
+  return TransactionModel.find(
+    {
+      $or: [
+        { subCountIdIn: { $in: idsArrData } },
+        { subCountIdOut: { $in: idsArrData } },
+      ],
+    },
+    "_id subCountIdIn subCountIdOut"
+  )
+    .sort({ _id: -1 })
+    .exec();
 }
 
 async function createTransaction(dto) {
@@ -36,6 +59,8 @@ async function deleteManyTrById(idsArrData) {
 
 module.exports = {
   getAllTransactions,
+  getAllTrsByCountIds,
+  getAllTrsBySubCountIds,
   createTransaction,
   findTransactionById,
   updateTransactionById,

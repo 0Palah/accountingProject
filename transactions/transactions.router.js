@@ -15,6 +15,16 @@ TransactionsRouter.get(
   // middlewares.authenticate,
   controllerWrapper(TransactionControllers.getAll)
 );
+TransactionsRouter.get(
+  "/getAll/byCountIds",
+  // middlewares.authenticate, middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  controllerWrapper(TransactionControllers.getAllTrsByCountIds)
+);
+TransactionsRouter.get(
+  "/getAll/bySubCountIds",
+  // middlewares.authenticate, middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  controllerWrapper(TransactionControllers.getAllTrsBySubCountIds)
+);
 
 TransactionsRouter.get(
   "/:id",

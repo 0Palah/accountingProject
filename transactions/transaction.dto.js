@@ -38,11 +38,7 @@ const updateTransactionDto = Joi.object({
   editor: Joi.string(),
   auditor: Joi.string(),
   transactionDate: Joi.string().required(),
-  type: Joi.string().valid(
-    TransactionsConstants.INCOME,
-    TransactionsConstants.EXPENSE,
-    TransactionsConstants.TRANSFER
-  ),
+  type: Joi.string().valid(...TransactionsConstants.TransactionsTypeEnum),
   countIdIn: Joi.string(),
   subCountIdIn: Joi.string(),
   countIdOut: Joi.string(),
