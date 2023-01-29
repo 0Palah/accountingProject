@@ -30,12 +30,14 @@ async function updateCountById(id, updateData) {
   });
 }
 
-async function checkParentCountById(id) {
-  const parentCount = await CountModel.findById(id);
+async function canHaveChildrenCheck(id) {
+  const parentDoc = await CountModel.findById(id);
 
-  if (parentCount.owner) {
-    throw createError({ status: 409 });
+  if (parentDoc && parentDoc?.owner) {
+    return false;
   }
+
+  return true;
 }
 
 module.exports = {
@@ -45,5 +47,5 @@ module.exports = {
   createCount,
   deleteCountById,
   updateCountById,
-  checkParentCountById,
+  canHaveChildrenCheck,
 };

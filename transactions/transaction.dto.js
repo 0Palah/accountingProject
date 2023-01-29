@@ -1,14 +1,14 @@
 const Joi = require("joi");
 // const phoneRegexp = require("../helpers/validatePhone");
 
-const TransactionsConstants = require("./transactions.constants");
+const { TransactionTypeEnum } = require("./transactions.constants");
 
 const createTrDtoSet = {
   athor: Joi.string(),
   editor: Joi.string(),
   auditor: Joi.string(),
   transactionDate: Joi.string().required(),
-  type: Joi.string().valid(...TransactionsConstants.TransactionsTypeEnum),
+  type: Joi.string().valid(...TransactionTypeEnum),
   countIdIn: Joi.string(),
   subCountIdIn: Joi.string(),
   countIdOut: Joi.string(),
@@ -38,7 +38,7 @@ const updateTransactionDto = Joi.object({
   editor: Joi.string(),
   auditor: Joi.string(),
   transactionDate: Joi.string().required(),
-  type: Joi.string().valid(...TransactionsConstants.TransactionsTypeEnum),
+  type: Joi.string().valid(...TransactionTypeEnum),
   countIdIn: Joi.string(),
   subCountIdIn: Joi.string(),
   countIdOut: Joi.string(),

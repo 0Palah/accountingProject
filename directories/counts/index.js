@@ -12,6 +12,6 @@ module.exports = {
   CountsController,
   CountsConstants,
   CountsService,
-  CountDto,
   CountsRouter,
+  CountDto,
 };

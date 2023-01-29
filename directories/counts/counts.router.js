@@ -4,32 +4,32 @@ const middlewares = require("../../middlewares");
 const CountDto = require("./count.dto");
 const CountController = require("./counts.controller");
 
-const countsRouter = express.Router();
+const CountsRouter = express.Router();
 
-countsRouter.get(
+CountsRouter.get(
   "/getAll",
   // middlewares.authenticate,
   controllerWrapper(CountController.getAllCounts)
 );
 
-countsRouter.post(
+CountsRouter.post(
   "/create",
   // middlewares.authenticate,
-  middlewares.validateBody(CountDto.createCouuntDto),
+  middlewares.validateBody(CountDto.createCountDto),
   controllerWrapper(CountController.createCount)
 );
 
-countsRouter.delete(
+CountsRouter.delete(
   "/delete/:id",
   // middlewares.authenticate,
   controllerWrapper(CountController.deleteCountById)
 );
 
-countsRouter.patch(
+CountsRouter.patch(
   "/update/:id",
   // middlewares.authenticate,
   middlewares.validateBody(CountDto.updateCountDto),
-  controllerWrapper(CountController)
+  controllerWrapper(CountController.updateCountById)
 );
 
-module.exports = countsRouter;
+module.exports = CountsRouter;

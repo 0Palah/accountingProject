@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser");
 const { UsersRouter } = require("./users");
 const { RolesRouter } = require("./roles");
 const { TransactionsRouter } = require("./transactions");
-const { CountsModule } = require("./directories");
-console.log(CountsModule);
+const { CountsModule, CategoriesModule } = require("./directories");
+// console.log(CountsModule);
 
 const app = express();
 
@@ -31,6 +31,7 @@ app.use("/api/users", UsersRouter);
 app.use("/api/roles", RolesRouter);
 app.use("/api/transactions", TransactionsRouter);
 app.use("/api/directories/counts", CountsModule.CountsRouter);
+app.use("/api/directories/categories", CategoriesModule.CategoriesRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

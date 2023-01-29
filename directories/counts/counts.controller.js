@@ -5,15 +5,6 @@ const { createError, HttpStatus } = require("../../helpers");
 async function createCount(req, res) {
   const newCount = req.body;
 
-  // const result =await CountsService.
-
-  if (newCount) {
-    throw createError({
-      status: HttpStatus.NOT_FOUND,
-      message: CountsMessages.CREATING_ERROR,
-    });
-  }
-
   const createdCount = await CountsService.createCount(newCount);
 
   if (!createdCount) {

@@ -4,7 +4,7 @@ const TRANSFER = `TRANSFER`;
 const CORRECT = `CORRECT`;
 const ARCHIVED = "ARCHIVED";
 const DELETED = "DELETED";
-const TransactionsTypeEnum = [
+const TransactionTypeEnum = [
   EXPENSE,
   INCOME,
   TRANSFER,
@@ -12,7 +12,9 @@ const TransactionsTypeEnum = [
   ARCHIVED,
   DELETED,
 ];
+const TRANSACTION_MODEL_NAME = "transaction";
 
 module.exports = {
-  TransactionsTypeEnum,
+  TransactionTypeEnum,
+  TRANSACTION_MODEL_NAME,
 };

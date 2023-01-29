@@ -1,10 +1,10 @@
 const Joi = require("Joi");
 
-const createCouuntDto = Joi.object({
+const createCountDto = Joi.object({
   name: Joi.string().required(),
   owner: Joi.string(),
   code: Joi.string(),
-  type: Joi.string(),
+  type: Joi.string().valid(),
   descr: Joi.string(),
 });
 
@@ -17,6 +17,6 @@ const updateCountDto = Joi.object({
 });
 
 module.exports = {
-  createCouuntDto,
+  createCountDto,
   updateCountDto,
 };
