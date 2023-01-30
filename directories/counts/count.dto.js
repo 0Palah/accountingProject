@@ -1,20 +1,20 @@
 const Joi = require("Joi");
 
 const createCountDto = Joi.object({
-  name: Joi.string().required(),
-  owner: Joi.string(),
-  code: Joi.string(),
-  type: Joi.string().valid(),
-  balance: Joi.number(),
-  descr: Joi.string(),
+  name: Joi.string().required().allow(null),
+  owner: Joi.string().allow(null),
+  code: Joi.string().allow(null),
+  type: Joi.string().valid("ACTIVE", "PASSIVE").allow(null),
+  balance: Joi.number().allow(null),
+  descr: Joi.string().allow(null),
 });
 
 const updateCountDto = Joi.object({
-  name: Joi.string(),
-  owner: Joi.string(),
-  code: Joi.string(),
-  type: Joi.string(),
-  descr: Joi.string(),
+  name: Joi.string().allow(null),
+  owner: Joi.string().allow(null),
+  code: Joi.string().allow(null),
+  type: Joi.string().valid("ACTIVE", "PASSIVE").allow(null),
+  descr: Joi.string().allow(null),
 });
 const correctCountBalanceDto = Joi.object({
   balance: Joi.number(),

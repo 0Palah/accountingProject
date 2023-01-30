@@ -1,11 +1,11 @@
 const express = require("express");
-
 const RolesRouter = express.Router();
-const middlewares = require("../middlewares");
-
-const { controllerWrapper } = require("../helpers");
-const RoleDto = require("./role.dto");
 const RoleControllers = require("./roles.controller");
+// const RoleDto = require("./role.dto");
+
+const middlewares = require("../middlewares");
+const { controllerWrapper } = require("../helpers");
+console.log(middlewares);
 
 RolesRouter.get(
   "/getAll",
@@ -16,7 +16,7 @@ RolesRouter.get(
 RolesRouter.post(
   "/create",
   // middlewares.authenticate,
-  middlewares.validateBody(RoleDto.createRoleDto),
+  // middlewares.validateBody(RoleDto.createRoleDto),
   controllerWrapper(RoleControllers.createRole)
 );
 
@@ -29,14 +29,14 @@ RolesRouter.delete(
 RolesRouter.patch(
   "/addActions/:id",
   // middlewares.authenticate,
-  middlewares.validateBody(RoleDto.updateRoleDto),
+  // middlewares.validateBody(RoleDto.updateRoleDto),
   controllerWrapper(RoleControllers.addActionsToRoleById)
 );
 
 RolesRouter.patch(
   "/removeActions/:id",
   // middlewares.authenticate,
-  middlewares.validateBody(RoleDto.updateRoleDto),
+  // middlewares.validateBody(RoleDto.updateRoleDto),
   controllerWrapper(RoleControllers.removeActionsFromRoleById)
 );
 

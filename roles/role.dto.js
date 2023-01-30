@@ -2,14 +2,14 @@ const Joi = require("Joi");
 
 const createRoleDto = Joi.object({
   name: Joi.string().required(),
-  routes: Joi.array().items(Joi.string()),
-  description: Joi.string(),
+  actions: Joi.array().items(Joi.string()),
+  descr: Joi.string(),
 });
 
 const updateRoleDto = Joi.object({
   name: Joi.string(),
-  routes: Joi.array().items(Joi.string()).min(1),
-  description: Joi.string(),
+  actions: Joi.array().items(Joi.string()).min(1),
+  descr: Joi.string(),
 });
 
 module.exports = {

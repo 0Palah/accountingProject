@@ -17,7 +17,7 @@ const roleSchema = new Schema(
       ],
       default: [],
     },
-    description: {
+    descr: {
       type: String,
     },
   },

@@ -1,6 +1,7 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 const { countTypeEnum, COUNT_MODEL_NAME } = require("./counts.constants");
 //!   { _id: 5, name: '', owner: '', type: '', code: '', descr: '' },
+
 const CountSchema = new Schema(
   {
     name: {

@@ -2,7 +2,14 @@ const TransactionModel = require("./transaction.model");
 // db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } )
 
 async function getAllTransactions() {
-  return TransactionModel.find().exec();
+  return TransactionModel.find()
+    .populate({ path: "countIdIn", select: "name code" })
+    .populate({ path: "subCountIdIn", select: "name code" })
+    .populate({ path: "countIdOut", select: "name code" })
+    .populate({ path: "subCountIdOut", select: "name code" })
+    .populate({ path: "categoryId", select: "name code" })
+    .populate({ path: "subCategoryId", select: "name code" })
+    .sort({ transactionDate: 1 });
 }
 async function getAllTrsByCountIds(idsArrData) {
   console.log("service", idsArrData);

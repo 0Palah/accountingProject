@@ -12,6 +12,7 @@ function validateBody(schema) {
     const { error } = schema.validate(req.body);
 
     if (error) {
+      console.log(error);
       throw createError({ status: 400, message: error.message });
     }
 
