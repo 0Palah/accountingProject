@@ -3,6 +3,7 @@ const { categoryTypeEnum } = require("./categories.constants");
 
 const createCategoryDto = Joi.object({
   name: Joi.string().required(),
+  label: Joi.string(),
   owner: Joi.string(),
   type: Joi.string()
     .valid(...categoryTypeEnum)
@@ -12,6 +13,7 @@ const createCategoryDto = Joi.object({
 
 const updateCategoryDto = Joi.object({
   name: Joi.string(),
+  label: Joi.string(),
   owner: Joi.string(),
   type: Joi.string().valid(...categoryTypeEnum),
   descr: Joi.string(),

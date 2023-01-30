@@ -4,6 +4,7 @@ const {
   CATEGORY_MODEL_NAME,
 } = require("./categories.constants");
 //!   { _id: 5, name: '', owner: '', type: '', code: '', descr: '' },
+
 const CountSchema = new Schema(
   {
     name: {

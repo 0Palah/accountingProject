@@ -32,4 +32,11 @@ CountsRouter.patch(
   controllerWrapper(CountController.updateCountById)
 );
 
+CountsRouter.patch(
+  "/update/correctCountBalanse:id",
+  // middlewares.authenticate,
+  middlewares.validateBody(CountDto.correctCountBalanceDto),
+  controllerWrapper(CountController.updateCountById)
+);
+
 module.exports = CountsRouter;

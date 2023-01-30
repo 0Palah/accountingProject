@@ -7,22 +7,23 @@ const { MongoConfig } = require("./configs");
 const { PORT } = process.env;
 
 async function start() {
-  try {
-    const DB_HOST = MongoConfig.getMongoHost(process.env);
-
-    if (DB_HOST) {
+  const DB_HOST = MongoConfig.getMongoHost(process.env);
+  if (DB_HOST) {
+    try {
       await mongoose.connect(DB_HOST);
 
-      console.log("Database connection successful");
+      console.log(
+        `Connected to MongodDB. DB_NAME: ${process?.env?.MONGO_DB_NAME}`
+      );
+
+      app.listen(PORT || 5000, () => {
+        console.log(`Server running. Use our API on port: ${PORT || 5000}`);
+      });
+    } catch (err) {
+      console.error(err);
+
+      process.exit(1);
     }
-
-    app.listen(PORT || 5000, () => {
-      console.log(`Server running. Use our API on port: ${PORT || 5000}`);
-    });
-  } catch (err) {
-    console.error(err);
-
-    process.exit(1);
   }
 }
 start();

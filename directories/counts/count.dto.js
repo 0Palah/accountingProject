@@ -5,6 +5,7 @@ const createCountDto = Joi.object({
   owner: Joi.string(),
   code: Joi.string(),
   type: Joi.string().valid(),
+  balance: Joi.number(),
   descr: Joi.string(),
 });
 
@@ -15,8 +16,12 @@ const updateCountDto = Joi.object({
   type: Joi.string(),
   descr: Joi.string(),
 });
+const correctCountBalanceDto = Joi.object({
+  balance: Joi.number(),
+});
 
 module.exports = {
   createCountDto,
   updateCountDto,
+  correctCountBalanceDto,
 };

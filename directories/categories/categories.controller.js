@@ -67,7 +67,7 @@ async function getAllCategories(_req, res) {
     });
   }
 
-  res.status(201).json({
+  res.status(200).json({
     message: CategoriesMessages.FOUND_ITEMS,
     data: allCategories,
   });
