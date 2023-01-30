@@ -8,7 +8,7 @@ const roleSchema = new Schema(
       required: [true, "Name is required"],
       unique: true,
     },
-    routes: {
+    actions: {
       type: [
         {
           type: String,

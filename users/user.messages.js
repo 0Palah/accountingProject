@@ -5,11 +5,14 @@ const NOT_VERIFY_EMAIL = (email) =>
 
 const NOT_FOUND_USER = "Email or password is wrong";
 
-const CREATING_SUCCESS = `Transaction created duccessfuly`;
+const CREATING_SUCCESS = `User created duccessfuly`;
+
+const FORBIDDEN_ACTION = `Forbiden action for this role`;
 
 module.exports = {
   EMAIL_IN_USE,
   NOT_VERIFY_EMAIL,
   CREATING_SUCCESS,
   NOT_FOUND_USER,
+  FORBIDDEN_ACTION,
 };

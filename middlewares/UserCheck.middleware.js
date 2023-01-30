@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const createError = require("../helpers/createError");
-const UsersService = require("../users");
+const UsersModule = require("../users");
+const RolesModule = require("../roles");
+const { HttpStatus } = require("../helpers");
 
 // const roles = ["ADMIN", "USER"];
 
 const { JWT_SECRET_KEY } = process.env;
 
-async function AuthCheck(roles = [], statuses = []) {
+async function UserCheck({ actionName = null, checkStatus = false }) {
   async function authenticate(req, _res, next) {
     try {
       const { authorization } = req.headers;
@@ -19,17 +21,24 @@ async function AuthCheck(roles = [], statuses = []) {
 
       const { id, role, status } = jwt.verify(token, JWT_SECRET_KEY);
 
-      const user = await UsersService.findUserById(id);
+      const user = await UsersModule.UserServise.findUserById(id);
 
       if (!user || !user.token || user.token !== token) {
         throw createError({ status: 401, message: null });
       }
 
-      if (roles && !roles.includes(role)) {
-        throw createError({ status: 403, message: null });
+      if (actionName) {
+        const userRole = await RolesModule.RolesService.findRoleByName(role);
+
+        if (!userRole.actions.includes(role)) {
+          throw createError({
+            status: HttpStatus.FORBIDDEN,
+            message: UsersModule.UserMessages.FORBIDDEN_ACTION,
+          });
+        }
       }
 
-      if (statuses && !statuses.includes(status)) {
+      if (checkStatus && !status) {
         throw createError({ status: 403, message: null });
       }
 
@@ -48,4 +57,4 @@ async function AuthCheck(roles = [], statuses = []) {
   return authenticate;
 }
 
-module.exports = AuthCheck;
+module.exports = UserCheck;
