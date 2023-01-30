@@ -1,8 +1,4 @@
-// const bcrypt = require("bcryptjs");
-// const { randomUUID } = require("crypto");
-// const createError = require("../../helpers/createError");
-// const UserModel = require("../user.model");
-const UsersService = require("../users.service");
+const UsersService = require("../auth.service");
 const sendSgEmail = require("../../helpers/sendSgEmail");
 
 const { BASE_URL } = process.env;

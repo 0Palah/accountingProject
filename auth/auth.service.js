@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const { randomUUID } = require("crypto");
 const createError = require("../helpers/createError");
 
-const UserModel = require("./user.model");
+const UserModel = require("./auth.model");
 
 async function findUserById(id) {
   return UserModel.findById(id);

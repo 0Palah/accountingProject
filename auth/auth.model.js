@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const emailRegexp = require("../helpers/validateEmail");
-const { userRolesEnum } = require("./user.constants");
+const { userRolesEnum } = require("./auth.constants");
 
 const userSchema = new Schema(
   {

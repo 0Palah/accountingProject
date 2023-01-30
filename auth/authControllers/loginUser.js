@@ -2,8 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // const cookieParser = require("cookie-parser");
 
-const createError = require("../../helpers/createError");
-const UserModel = require("../user.model");
+const { createError } = require("../../helpers");
+const UserModel = require("../auth.model");
 
 const { JWT_SECRET_KEY } = process.env;
 const { JWT_REFRESH_SECRET_KEY } = process.env;
@@ -17,7 +17,7 @@ async function loginUser(req, res) {
     throw createError({ status: 401, message: "Email or password is wrong" });
   }
 
-  if (!user.status) {
+  if (user.verificationToken) {
     throw createError({
       status: 401,
       message: "User not verified. Please verify you email",
@@ -49,6 +49,6 @@ async function loginUser(req, res) {
     maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   });
-  res.json({ token, refreshToken });
+  res.json({ token });
 }
 module.exports = loginUser;

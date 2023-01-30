@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const { UsersRouter } = require("./users");
+const { AuthsRouter } = require("./auth");
 const { RolesRouter } = require("./roles");
 const { TransactionsRouter } = require("./transactions");
 const { CountsModule, CategoriesModule } = require("./directories");
@@ -27,7 +27,7 @@ app.use(cookieParser());
 //     res.status(200).json({ message: "Hello" });
 //   })
 // );
-app.use("/api/users", UsersRouter);
+app.use("/api/users", AuthsRouter);
 app.use("/api/roles", RolesRouter);
 app.use("/api/transactions", TransactionsRouter);
 app.use("/api/directories/counts", CountsModule.CountsRouter);

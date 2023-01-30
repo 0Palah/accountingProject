@@ -1,6 +1,6 @@
 const Joi = require("Joi");
 const emailRegexp = require("../helpers/validateEmail");
-const { userRolesEnum } = require("./user.constants");
+const { userRolesEnum } = require("./auth.constants");
 
 const registerUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
