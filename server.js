@@ -9,7 +9,9 @@ const { PORT } = process.env;
 
 async function start() {
   const DB_HOST = MongoConfig.getMongoHost(process.env);
+
   console.log("getArrayOfApiActions", getArrayOfApiActions());
+
   if (DB_HOST) {
     try {
       await mongoose.connect(DB_HOST);

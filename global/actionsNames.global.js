@@ -24,11 +24,17 @@ const apiActions = {
     path: "",
   },
 };
-// const apiActionsArr = [apiActions.createTransaction];
 
 function getArrayOfApiActions() {
   const keys = Object.keys(apiActions);
-  console.log(keys);
+
+  const actionsArr = [];
+
+  for (const key of keys) {
+    actionsArr.push(apiActions[key]);
+  }
+
+  return actionsArr;
 }
 
 module.exports = { apiActions, getArrayOfApiActions };
