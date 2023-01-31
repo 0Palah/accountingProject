@@ -88,6 +88,7 @@ const {
 //   model("transaction", transactionSchema, `transactions_${copanyId}`);
 // const TransactionModel_ = CreateTransactionModel("021542");
 
+
 const transactionSchema = new Schema(
   {
     athor: {
@@ -137,6 +138,7 @@ const transactionSchema = new Schema(
     amount: {
       type: Number,
       // required: [true, `Amount is required`],
+
     },
     document: {
       type: String,
@@ -160,6 +162,7 @@ const transactionSchema = new Schema(
         },
       ],
       eachPath: true,
+
     },
     comment: {
       type: String,
@@ -171,4 +174,5 @@ const transactionSchema = new Schema(
   }
 );
 const TransactionModel = model(TRANSACTION_MODEL_NAME, transactionSchema);
+
 module.exports = TransactionModel;
