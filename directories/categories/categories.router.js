@@ -1,6 +1,6 @@
 const express = require("express");
 const { controllerWrapper } = require("../../helpers");
-const middlewares = require("../../middlewares");
+const validateBody = require("../../middlewares/validateBody");
 const CategoryDto = require("./category.dto");
 const CategoriesController = require("./categories.controller");
 
@@ -15,7 +15,7 @@ CategoryRouter.get(
 CategoryRouter.post(
   "/create",
   // middlewares.authenticate,
-  middlewares.validateBody(CategoryDto.createCategoryDto),
+  validateBody(CategoryDto.createCategoryDto),
   controllerWrapper(CategoriesController.createCategory)
 );
 
@@ -28,7 +28,7 @@ CategoryRouter.delete(
 CategoryRouter.patch(
   "/update/:id",
   // middlewares.authenticate,
-  middlewares.validateBody(CategoryDto.updateCategoryDto),
+  validateBody(CategoryDto.updateCategoryDto),
   controllerWrapper(CategoriesController.updateCategoryById)
 );
 

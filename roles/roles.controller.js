@@ -1,6 +1,7 @@
 const RolesService = require("./roles.service");
 const RolesMessages = require("./roles.messages");
 const { createError } = require("../helpers");
+const { apiActions } = require("./actionsNames.map");
 
 async function createRole(req, res) {
   const { name, routes, description } = req.body;
@@ -78,6 +79,9 @@ async function getAllRoles(_req, res) {
     data: allRoles,
   });
 }
+async function getAllActions() {
+  return apiActions;
+}
 
 module.exports = {
   createRole,
@@ -85,4 +89,5 @@ module.exports = {
   getAllRoles,
   addActionsToRoleById,
   removeActionsFromRoleById,
+  getAllActions,
 };

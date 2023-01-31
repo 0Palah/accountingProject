@@ -1,67 +1,67 @@
 const express = require("express");
 
-const TransactionsRouter = express.Router();
-const middlewares = require("../middlewares");
-
-const { controllerWrapper } = require("../helpers");
-const TransactionDto = require("./transaction.dto");
 const TransactionControllers = require("./transactionControllers");
-
-// console.log(TransactionDto);
-// console.log(TransactionControllers);
+const TransactionsRouter = express.Router();
+const TransactionDto = require("./transaction.dto");
+// const validateBody = require("../middlewares/validateBody");
+// const authenticate = require("../middlewares/authenticate");
+const UserCheck = require("../middlewares/UserCheck.middleware");
+const { controllerWrapper } = require("../helpers");
+const { authenticate, validateBody } = require("../middlewares");
 
 TransactionsRouter.get(
   "/getAll",
-  // middlewares.authenticate,
+  // authenticate,
+  UserCheck({ actionName: TransactionControllers.getAll.name }),
   controllerWrapper(TransactionControllers.getAll)
 );
 TransactionsRouter.get(
   "/getAll/byCountIds",
-  // middlewares.authenticate, middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  // authenticate, validateBody(TransactionDto.deleteManyTrsDto),
   controllerWrapper(TransactionControllers.getAllTrsByCountIds)
 );
 TransactionsRouter.get(
   "/getAll/bySubCountIds",
-  // middlewares.authenticate, middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  // authenticate, validateBody(TransactionDto.deleteManyTrsDto),
   controllerWrapper(TransactionControllers.getAllTrsBySubCountIds)
 );
 
 TransactionsRouter.get(
   "/:id",
-  // middlewares.authenticate,
+  // authenticate,
   controllerWrapper(TransactionControllers.getById)
 );
 
 TransactionsRouter.post(
   "/create",
-  // middlewares.authenticate,
-  middlewares.validateBody(TransactionDto.addTransactionDto),
+  // authenticate,
+  validateBody(TransactionDto.addTransactionDto),
   controllerWrapper(TransactionControllers.createTransaction)
 );
 
 TransactionsRouter.post(
   "/createMany",
-  // middlewares.authenticate,
-  middlewares.validateBody(TransactionDto.addManyTransactionsDto),
+  // authenticate,
+  validateBody(TransactionDto.addManyTransactionsDto),
   controllerWrapper(TransactionControllers.createManyTransactions)
 );
 
 TransactionsRouter.delete(
   "/delete/:id",
-  // middlewares.authenticate,
+  // authenticate,
   controllerWrapper(TransactionControllers.deleteTransactionById)
 );
 TransactionsRouter.delete(
   "/deleteManyById",
-  // middlewares.authenticate,
-  middlewares.validateBody(TransactionDto.deleteManyTrsDto),
+  // authenticate,
+  validateBody(TransactionDto.deleteManyTrsDto),
   controllerWrapper(TransactionControllers.deleteManyTrById)
 );
 
 TransactionsRouter.patch(
   "/:id",
-  middlewares.authenticate,
-  middlewares.validateBody(TransactionDto.updateTransactionDto),
+  authenticate,
+  validateBody(TransactionDto.updateTransactionDto),
   controllerWrapper(TransactionControllers.updateTransaction)
 );
 
