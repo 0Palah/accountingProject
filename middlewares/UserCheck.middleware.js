@@ -5,7 +5,7 @@ const AuthMessages = require("../auth/auth.messages");
 const { HttpStatus } = require("../helpers");
 
 function UserCheck({ actionName = "", checkStatus = false } = {}) {
-  console.log("UserCheck actionName ======= >>>>>>>>>", actionName);
+  // console.log("UserCheck actionName ======= >>>>>>>>>", actionName);
 
   async function authenticate(req, res, next) {
     try {

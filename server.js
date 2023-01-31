@@ -3,14 +3,11 @@ dotenv.config();
 const mongoose = require("mongoose");
 const app = require("./app");
 const { MongoConfig } = require("./configs");
-const { getArrayOfApiActions } = require("./roles/actionsNames.map");
 
 const { PORT } = process.env;
 
 async function start() {
   const DB_HOST = MongoConfig.getMongoHost(process.env);
-
-  // console.log("getArrayOfApiActions", getArrayOfApiActions());
 
   if (DB_HOST) {
     try {

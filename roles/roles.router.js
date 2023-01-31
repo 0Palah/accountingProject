@@ -1,44 +1,40 @@
 const express = require("express");
 const RolesRouter = express.Router();
-const RoleControllers = require("./roles.controller");
+const RoleController = require("./roles.controller");
 const { controllerWrapper } = require("../helpers");
 const validateBody = require("../middlewares/validateBody");
-const authenticate = require("../middlewares/authenticate");
 const RoleDto = require("./role.dto");
-
-// console.log("roles router", middlewares);
+const middlewares = require("../middlewares");
 
 RolesRouter.get(
   "/getAll",
-  // middlewares.authenticate,
-  controllerWrapper(RoleControllers.getAllRoles)
+  middlewares.UserCheck(),
+  controllerWrapper(RoleController.getAllRoles)
 );
 
 RolesRouter.post(
   "/create",
-  authenticate,
   validateBody(RoleDto.createRoleDto),
-  controllerWrapper(RoleControllers.createRole)
+  controllerWrapper(RoleController.createRole)
 );
 
-RolesRouter.delete(
-  "/:id",
-  authenticate,
-  controllerWrapper(RoleControllers.deleteRoleById)
-);
+RolesRouter.delete("/:id", controllerWrapper(RoleController.deleteRoleById));
 
 RolesRouter.patch(
   "/addActions/:id",
-  authenticate,
   validateBody(RoleDto.updateRoleDto),
-  controllerWrapper(RoleControllers.addActionsToRoleById)
+  controllerWrapper(RoleController.addActionsToRoleById)
 );
 
 RolesRouter.patch(
   "/removeActions/:id",
-  authenticate,
   validateBody(RoleDto.updateRoleDto),
-  controllerWrapper(RoleControllers.removeActionsFromRoleById)
+  controllerWrapper(RoleController.removeActionsFromRoleById)
+);
+
+RolesRouter.get(
+  "/getAllActions",
+  controllerWrapper(RoleController.getAllActions)
 );
 
 module.exports = RolesRouter;

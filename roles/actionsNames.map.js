@@ -1,12 +1,17 @@
-const { transactionsActionsMap } = require("../transactions");
-const { categoriesActionsMap } = require("../directories/categories");
+const transactionsActionsMap = require("../transactions/transactions.map");
+const categoriesActionsMap = require("../directories/categories/categories.map");
+const countsActionsMap = require("../directories/counts//counts.map");
+const apiActions = [
+  ...transactionsActionsMap,
+  ...categoriesActionsMap,
+  ...countsActionsMap,
+];
+// async function getArrayOfApiActions(log) {
+//   // apiActions.map((act) => console.log(act.name));
 
-const apiActions = [...transactionsActionsMap, ...categoriesActionsMap];
+//   log && console.log(apiActions.map((el) => el.name));
 
-function getArrayOfApiActions() {
-  console.log("apiActions", apiActions);
-
-  return apiActions;
-}
-
-module.exports = { apiActions, getArrayOfApiActions };
+//   return apiActions;
+// }
+// module.exports = { apiActions, getArrayOfApiActions };
+module.exports = apiActions;
