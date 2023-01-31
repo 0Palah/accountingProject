@@ -9,7 +9,7 @@ async function getAllTransactions() {
     .populate({ path: "subCountIdOut", select: "name code" })
     .populate({ path: "categoryId", select: "name code" })
     .populate({ path: "subCategoryId", select: "name code" })
-    .sort({ transactionDate: 1 });
+    .sort({ transactionDate: -1 });
 }
 async function getAllTrsByCountIds(idsArrData) {
   console.log("service", idsArrData);
@@ -35,7 +35,9 @@ async function getAllTrsBySubCountIds(idsArrData) {
 }
 
 async function createTransaction(dto) {
-  return TransactionModel.create(dto);
+  const createdDoc = await TransactionModel.create(dto);
+
+  return findTransactionById(createdDoc?._id);
 }
 async function createManyTrs(trsArrData) {
   return TransactionModel.insertMany(trsArrData);
@@ -48,13 +50,13 @@ async function updateTransactionById(id, updateData) {
 }
 
 async function findTransactionById(id) {
-  const result = await TransactionModel.findById(id);
-
-  if (!result) {
-    throw new Error();
-  }
-
-  return result;
+  return TransactionModel.findById(id)
+    .populate({ path: "countIdIn", select: "name code" })
+    .populate({ path: "subCountIdIn", select: "name code" })
+    .populate({ path: "countIdOut", select: "name code" })
+    .populate({ path: "subCountIdOut", select: "name code" })
+    .populate({ path: "categoryId", select: "name code" })
+    .populate({ path: "subCategoryId", select: "name code" });
 }
 
 async function deleteTransactionById(id) {
