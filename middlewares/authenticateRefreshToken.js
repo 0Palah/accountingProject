@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const { createError } = require("../helpers/createError");
-const User = require("../models/users");
+const createError = require("../helpers/createError");
+const AuthServise = require("../auth/auth.service");
 
 const { JWT_REFRESH_SECRET_KEY } = process.env;
 
@@ -15,7 +15,7 @@ async function authenticateRefreshToken(req, res, next) {
 
     const { id } = jwt.verify(refreshToken, JWT_REFRESH_SECRET_KEY);
 
-    const user = await User.findById(id);
+    const user = await AuthServise.findUserById(id);
     if (!user || !user.refreshToken || user.refreshToken !== refreshToken) {
       throw createError({ status: 401, message: "Not authorized" });
     }
@@ -32,4 +32,4 @@ async function authenticateRefreshToken(req, res, next) {
   }
 }
 
-module.exports = { authenticateRefreshToken };
+module.exports = authenticateRefreshToken;

@@ -1,11 +1,13 @@
-const { validateBody } = require("./validateBody");
-const { authenticate } = require("./authenticate");
-const { authenticateRefreshToken } = require("./authenticateRefreshToken");
-const { upload } = require("./upload");
+const validateBody = require("./validateBody");
+const UserCheck = require("./UserCheck.middleware");
+const authenticate = require("./authenticate");
+const authenticateRefreshToken = require("./authenticateRefreshToken");
+const upload = require("./upload");
 
 module.exports = {
   validateBody,
-  authenticate,
+  UserCheck,
   authenticateRefreshToken,
   upload,
+  authenticate,
 };

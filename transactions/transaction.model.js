@@ -1,61 +1,168 @@
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
+const { AuthConstants } = require("../auth");
+const { CountsConstants } = require("../directories/counts");
+const { CategoriesConstants } = require("../directories/categories");
+
+const {
+  TRANSACTION_MODEL_NAME,
+  TransactionTypeEnum,
+} = require("./transactions.constants");
+
+// const transactionSchema = new Schema(
+//   {
+//     athor: {
+//       type: String,
+//     },
+//     creator: {
+//       type: String,
+//     },
+//     auditor: {
+//       type: String,
+//     },
+//     transactionDate: {
+//       type: Date,
+//       default: new Date(),
+//     },
+//     type: {
+//       type: String,
+//       enum: TransactionsConstants.TransactionsTypeEnum,
+//     },
+//     countIdIn: {
+//       type: String,
+//     },
+//     subCountIdIn: {
+//       type: String,
+//     },
+//     countIdOut: {
+//       type: String,
+//     },
+//     subCountIdOut: {
+//       type: String,
+//     },
+//     categoryId: {
+//       type: String,
+//     },
+//     subCategoryId: {
+//       type: String,
+//     },
+//     document: {
+//       type: String,
+//     },
+//     project: {
+//       type: String,
+//     },
+//     contractor: {
+//       type: String,
+//     },
+//     amount: {
+//       type: Number,
+//     },
+//     status: {
+//       type: String,
+//     },
+//     mark: {
+//       type: String,
+//     },
+//     tags: {
+//       type: [
+//         {
+//           type: String,
+//         },
+//       ],
+//       eachPath: true,
+//     },
+//     comment: {
+//       type: String,
+//     },
+//   },
+//   {
+//     versionKey: false,
+//     timestamps: true,
+//   }
+// );
+
+// const TransactionModel = model("transaction", transactionSchema);
+// module.exports = TransactionModel;
+
+// const CreateTransactionModel = (copanyId) =>
+//   model("transaction", transactionSchema, `transactions_${copanyId}`);
+// const TransactionModel_ = CreateTransactionModel("021542");
+
 
 const transactionSchema = new Schema(
   {
     athor: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: AuthConstants.USER_MODEL_NAME,
     },
-    creator: {
-      type: String,
+    editor: {
+      type: Schema.Types.ObjectId,
+      ref: AuthConstants.USER_MODEL_NAME,
     },
     auditor: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: AuthConstants.USER_MODEL_NAME,
     },
     transactionDate: {
-      type: String,
+      type: Date,
+      default: new Date(),
     },
     type: {
       type: String,
-      enum: ["income", "expense", "transfer"],
+      enum: TransactionTypeEnum,
     },
-    countId: {
-      type: String,
+    countIdIn: {
+      type: Schema.Types.ObjectId,
+      ref: CountsConstants.COUNT_MODEL_NAME,
     },
-    subCountId: {
-      type: String,
+    subCountIdIn: {
+      type: Schema.Types.ObjectId,
+      ref: CountsConstants.COUNT_MODEL_NAME,
     },
-    transferCountId: {
-      type: String,
+    countIdOut: {
+      type: Schema.Types.ObjectId,
+      ref: CountsConstants.COUNT_MODEL_NAME,
     },
-    transferSubCountIdTo: {
-      type: String,
+    subCountIdOut: {
+      type: Schema.Types.ObjectId,
+      ref: CountsConstants.COUNT_MODEL_NAME,
     },
     categoryId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: CategoriesConstants.CATEGORY_MODEL_NAME,
     },
     subCategoryId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: CategoriesConstants.CATEGORY_MODEL_NAME,
+    },
+    amount: {
+      type: Number,
+      // required: [true, `Amount is required`],
+
     },
     document: {
       type: String,
     },
     project: {
-      type: String,
+      type: Schema.Types.ObjectId,
     },
-    customer: {
-      type: String,
-    },
-    amount: {
-      type: Number,
+    contractor: {
+      type: Schema.Types.ObjectId,
     },
     status: {
-      type: String,
+      type: Schema.Types.ObjectId,
     },
     mark: {
-      type: String,
+      type: Schema.Types.ObjectId,
     },
     tags: {
-      type: String,
+      type: [
+        {
+          type: String,
+        },
+      ],
+      eachPath: true,
+
     },
     comment: {
       type: String,
@@ -66,7 +173,6 @@ const transactionSchema = new Schema(
     timestamps: true,
   }
 );
-
-const TransactionModel = model("transaction", transactionSchema);
+const TransactionModel = model(TRANSACTION_MODEL_NAME, transactionSchema);
 
 module.exports = TransactionModel;
