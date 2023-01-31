@@ -3,11 +3,13 @@ dotenv.config();
 const mongoose = require("mongoose");
 const app = require("./app");
 const { MongoConfig } = require("./configs");
+const { getArrayOfApiActions } = require("./global/actionsNames.global");
 
 const { PORT } = process.env;
 
 async function start() {
   const DB_HOST = MongoConfig.getMongoHost(process.env);
+  console.log("getArrayOfApiActions", getArrayOfApiActions());
   if (DB_HOST) {
     try {
       await mongoose.connect(DB_HOST);
