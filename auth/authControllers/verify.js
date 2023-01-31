@@ -1,5 +1,5 @@
 const { createError } = require("../../helpers");
-const UserModel = require("../user.model");
+const UserModel = require("../auth.model");
 
 async function verify(req, res) {
   const { verificationToken } = req.params;

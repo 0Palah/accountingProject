@@ -1,51 +1,51 @@
 const express = require("express");
 
-const UsersRouter = express.Router();
+const AuthsRouter = express.Router();
 
-const controllers = require("./usersControllers");
+const controllers = require("./authControllers");
 const middlewares = require("../middlewares");
-const UserDto = require("./user.dto");
+const UserDto = require("./auth.dto");
 const controllerWrapper = require("../helpers/controllerWrapper");
 
-UsersRouter.post(
+AuthsRouter.post(
   "/register",
   middlewares.validateBody(UserDto.registerUserSchema),
   controllerWrapper(controllers.registerUser)
 );
 
-UsersRouter.get(
+AuthsRouter.get(
   "/login",
   middlewares.validateBody(UserDto.loginUserSchema),
   controllerWrapper(controllers.loginUser)
 );
 
-UsersRouter.get(
+AuthsRouter.get(
   "/current",
   middlewares.authenticate,
   controllerWrapper(controllers.getCurrentUser)
 );
 
-UsersRouter.post(
+AuthsRouter.post(
   "/logout",
-  middlewares.authenticateRefreshToken,
+  middlewares.authenticate,
   controllerWrapper(controllers.logoutUser)
 );
 
-UsersRouter.post(
+AuthsRouter.post(
   "/verify",
   middlewares.validateBody(UserDto.resendVerificationEmail),
   controllerWrapper(controllers.resendVerificationEmail)
 );
 
-UsersRouter.get(
+AuthsRouter.get(
   "/refreshToken",
   middlewares.authenticateRefreshToken,
   controllerWrapper(controllers.refreshToken)
 );
 
-UsersRouter.get(
+AuthsRouter.get(
   "/verify/:verificationToken",
   controllerWrapper(controllers.verify)
 );
 
-module.exports = UsersRouter;
+module.exports = AuthsRouter;

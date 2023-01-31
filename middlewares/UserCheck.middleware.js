@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const createError = require("../helpers/createError");
-const UsersModule = require("../users");
+const AuthServise = require("../auth/auth.service");
 const RolesModule = require("../roles");
 const { HttpStatus } = require("../helpers");
 
@@ -21,7 +21,7 @@ async function UserCheck({ actionName = null, checkStatus = false }) {
 
       const { id, role, status } = jwt.verify(token, JWT_SECRET_KEY);
 
-      const user = await UsersModule.UserServise.findUserById(id);
+      const user = await AuthServise.findUserById(id);
 
       if (!user || !user.token || user.token !== token) {
         throw createError({ status: 401, message: null });

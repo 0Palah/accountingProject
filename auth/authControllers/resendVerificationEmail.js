@@ -1,5 +1,5 @@
-const { createError } = require("../../helpers/createError");
-const UsersService = require("../users.service");
+const { createError } = require("../../helpers");
+const UsersService = require("../auth.service");
 const sendSgEmail = require("../../helpers/sendSgEmail");
 
 const { BASE_URL } = process.env;
@@ -8,7 +8,7 @@ async function resendVerificationEmail(req, res) {
   const { email } = req.body;
 
   const user = await UsersService.findOneUser({ email });
-
+  console.log(user);
   if (!email) {
     throw createError({ status: 400, message: "Missing required field email" });
   }
@@ -17,7 +17,7 @@ async function resendVerificationEmail(req, res) {
     throw createError({ status: 404, message: "User not found" });
   }
 
-  if (user.status) {
+  if (!user.verificationToken) {
     throw createError({
       status: 400,
       message: "Verification has already been passed",
