@@ -1,4 +1,5 @@
-const { createError } = require("../helpers");
+const { createError, HttpStatus } = require("../helpers");
+const AuthMessages = require("../auth/auth.messages");
 
 const RoleModel = require("./role.model");
 
@@ -48,6 +49,18 @@ async function removeActionsFromRoleById(id, routes) {
     }
   );
 }
+async function UserCheckByRole({ role, actionName, error }) {
+  const userRole = await findRoleByName(role);
+
+  if (!userRole.actions.includes(actionName)) {
+    throw createError({
+      status: HttpStatus.FORBIDDEN,
+      message: AuthMessages.FORBIDDEN_ACTION,
+    });
+  }
+
+  return { canActive: true };
+}
 
 module.exports = {
   getAllRoles,
@@ -58,4 +71,5 @@ module.exports = {
   deleteRoleById,
   addActionsToRoleById,
   removeActionsFromRoleById,
+  UserCheckByRole,
 };

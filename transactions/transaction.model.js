@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { AuthConstants } = require("../auth");
+const { USER_MODEL_NAME } = require("../auth/auth.constants");
 const { CountsConstants } = require("../directories/counts");
 const { CategoriesConstants } = require("../directories/categories");
 
@@ -92,15 +92,15 @@ const transactionSchema = new Schema(
   {
     athor: {
       type: Schema.Types.ObjectId,
-      ref: AuthConstants.USER_MODEL_NAME,
+      ref: USER_MODEL_NAME,
     },
     editor: {
       type: Schema.Types.ObjectId,
-      ref: AuthConstants.USER_MODEL_NAME,
+      ref: USER_MODEL_NAME,
     },
     auditor: {
       type: Schema.Types.ObjectId,
-      ref: AuthConstants.USER_MODEL_NAME,
+      ref: USER_MODEL_NAME,
     },
     transactionDate: {
       type: Date,

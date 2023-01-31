@@ -1,6 +1,6 @@
 const express = require("express");
 const { controllerWrapper } = require("../../helpers");
-const middlewares = require("../../middlewares");
+const validateBody = require("../../middlewares/validateBody");
 const CountDto = require("./count.dto");
 const CountController = require("./counts.controller");
 
@@ -15,7 +15,7 @@ CountsRouter.get(
 CountsRouter.post(
   "/create",
   // middlewares.authenticate,
-  middlewares.validateBody(CountDto.createCountDto),
+  validateBody(CountDto.createCountDto),
   controllerWrapper(CountController.createCount)
 );
 
@@ -28,14 +28,14 @@ CountsRouter.delete(
 CountsRouter.patch(
   "/update/:id",
   // middlewares.authenticate,
-  middlewares.validateBody(CountDto.updateCountDto),
+  validateBody(CountDto.updateCountDto),
   controllerWrapper(CountController.updateCountById)
 );
 
 CountsRouter.patch(
   "/update/correctCountBalanse:id",
   // middlewares.authenticate,
-  middlewares.validateBody(CountDto.correctCountBalanceDto),
+  validateBody(CountDto.correctCountBalanceDto),
   controllerWrapper(CountController.updateCountById)
 );
 
