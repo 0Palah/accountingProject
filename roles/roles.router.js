@@ -32,9 +32,4 @@ RolesRouter.patch(
   controllerWrapper(RoleController.removeActionsFromRoleById)
 );
 
-RolesRouter.get(
-  "/getAllActions",
-  controllerWrapper(RoleController.getAllActions)
-);
-
 module.exports = RolesRouter;

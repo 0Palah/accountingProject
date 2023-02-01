@@ -1,7 +1,7 @@
 const RoleModel = require("./role.model");
 const AuthMessages = require("../auth/auth.messages");
 const { createError, HttpStatus } = require("../helpers");
-const apiActions = require("./actionsNames.map");
+// const apiActions = require("./actionsNames.map");
 
 async function getAllRoles() {
   return RoleModel.find();
@@ -61,13 +61,6 @@ async function UserCheckByRole({ role, actionName, error }) {
 
   return { canActive: true };
 }
-async function getArrayOfApiActions(log) {
-  // apiActions.map((act) => console.log(act.name));
-
-  log && console.log(apiActions.map((el) => el.name));
-
-  return apiActions;
-}
 
 module.exports = {
   getAllRoles,
@@ -79,5 +72,5 @@ module.exports = {
   addActionsToRoleById,
   removeActionsFromRoleById,
   UserCheckByRole,
-  getArrayOfApiActions,
+  // getArrayOfApiActions,
 };

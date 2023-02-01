@@ -78,9 +78,6 @@ async function getAllRoles(_req, res) {
     data: allRoles,
   });
 }
-async function getAllActions() {
-  return RolesService.getArrayOfApiActions();
-}
 
 module.exports = {
   createRole,
@@ -88,5 +85,5 @@ module.exports = {
   getAllRoles,
   addActionsToRoleById,
   removeActionsFromRoleById,
-  getAllActions,
+  // getAllActions,
 };
