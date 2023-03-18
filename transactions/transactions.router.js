@@ -5,14 +5,14 @@ const TransactionsRouter = express.Router();
 const TransactionDto = require("./transaction.dto");
 // const validateBody = require("../middlewares/validateBody");
 // const authenticate = require("../middlewares/authenticate");
-const UserCheck = require("../middlewares/UserCheck.middleware");
+// const UserCheck = require("../middlewares/UserCheck.middleware");
 const { controllerWrapper } = require("../helpers");
 const { authenticate, validateBody } = require("../middlewares");
 
 TransactionsRouter.get(
   "/getAll",
   // authenticate,
-  UserCheck({ actionName: TransactionControllers.getAll.name }),
+  // UserCheck({ actionName: TransactionControllers.getAll.name }),
   controllerWrapper(TransactionControllers.getAll)
 );
 TransactionsRouter.get(

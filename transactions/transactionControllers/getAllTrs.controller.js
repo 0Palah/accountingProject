@@ -2,6 +2,8 @@ const TransactionMessages = require("../transactions.messages");
 const TransactionService = require("../transactions.service");
 
 async function getAllTransaction(req, res) {
+  console.log("req.params", req.params);
+
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
   const paginationSettings = {

@@ -27,5 +27,16 @@ const transactionsActionsMap = [
     descr: "For deleting array of transactions",
   },
 ];
+const tractionsMap = {
+  getAll: {
+    name: "getAllTransactions",
+    title: "Отримати усі транзакції",
+    descr:
+      "Дозволяє отримати усі транзакції. Має бути захищеним та передати транзакції певної організації",
+    controller: TransactionControllers.getAll,
+  },
+};
+
+console.log(tractionsMap);
 
 module.exports = transactionsActionsMap;

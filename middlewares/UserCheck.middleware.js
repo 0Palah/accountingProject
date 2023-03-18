@@ -1,26 +1,14 @@
-const createError = require("../helpers/createError");
 const AuthServise = require("../auth/auth.service");
 const RolesService = require("../roles/roles.service");
 const AuthMessages = require("../auth/auth.messages");
 const { HttpStatus } = require("../helpers");
 
-function UserCheck({ actionName = "", checkStatus = false } = {}) {
+function UserCheck({ actionName = "" } = {}) {
   console.log("UserCheck actionName ======= >>>>>>>>>", actionName);
 
   async function authenticate(req, res, next) {
     try {
-      const { role, status, user } = await AuthServise.UserCheckByToken(
-        req,
-        res,
-        next
-      );
-
-      if (checkStatus && !status) {
-        throw createError({
-          status: HttpStatus.FORBIDDEN,
-          message: AuthMessages.FORBIDDEN_ACTION,
-        });
-      }
+      const { role, user } = await AuthServise.UserCheckByToken(req, res, next);
 
       if (actionName) {
         const { canActive } = await RolesService.UserCheckByRole({
